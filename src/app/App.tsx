@@ -2,7 +2,23 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
-import { X, ArrowUpRight, Send, ChevronDown, Sparkles, Gauge, Dumbbell, BrainCircuit, PenTool } from "lucide-react";
+import Link from "next/link";
+import {
+  X,
+  ArrowUpRight,
+  ArrowRight,
+  Send,
+  ChevronDown,
+  Sparkles,
+  Gauge,
+  Dumbbell,
+  BrainCircuit,
+  PenTool,
+  Scale,
+  Code2,
+  LineChart,
+  Radar,
+} from "lucide-react";
 import { contact } from "@/data/shayan/contact";
 import { emitSceneReaction } from "@/lib/three/sceneEvents";
 
@@ -26,12 +42,18 @@ interface Project {
   description: string;
   category: "web" | "ai";
   url?: string;
+  href?: string;
+  cta?: string;
   tags: string[];
   hue: string;
-  image: string;
-  imageAlt: string;
+  image?: string;
+  imageAlt?: string;
   imageFit?: "cover" | "contain";
   imageBackground?: string;
+  visual?: {
+    code: string;
+    stages: string[];
+  };
 }
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -163,37 +185,64 @@ const WEB_PROJECTS: Project[] = [
 
 const AI_PROJECTS: Project[] = [
   {
-    id: "ai-assistant",
-    title: "Intelligent AI Assistant",
+    id: "debate",
+    title: "Debate Council",
     description:
-      "I built a conversational AI system trained on domain-specific knowledge, capable of nuanced reasoning and contextual awareness across complex workflows.",
+      "I built a multi-agent reasoning council where two debaters develop opposing cases and a separate judge evaluates the arguments without taking a side.",
     category: "ai",
-    tags: ["LLM", "RAG", "Agent"],
-    hue: "265",
-    image: "/assets/projects/story-ai.jpg",
-    imageAlt: "Artificial intelligence circuitry",
+    href: "/work/ai/debate",
+    cta: "Launch system",
+    tags: ["CrewAI", "Reasoning", "Multi-Agent"],
+    hue: "350",
+    visual: {
+      code: "DC",
+      stages: ["Proposer", "Opponent", "Judge"],
+    },
   },
   {
-    id: "agentic-workflow",
-    title: "Agentic Workflow Engine",
+    id: "engineering_team",
+    title: "Engineering Team",
     description:
-      "I designed a multi-agent orchestration system for complex, multi-step task automation with human-in-the-loop checkpoints.",
+      "I designed a Claude-powered coding crew that turns a software brief into a complete, reviewed, and runnable project bundle across languages and frameworks.",
     category: "ai",
-    tags: ["LangChain", "Orchestration", "Automation"],
-    hue: "230",
-    image: "/assets/projects/project-network.jpg",
-    imageAlt: "Networked digital systems",
+    href: "/work/ai/engineering_team",
+    cta: "Launch system",
+    tags: ["CrewAI", "Claude", "Code Generation"],
+    hue: "42",
+    visual: {
+      code: "ET",
+      stages: ["Architect", "Engineer", "Reviewer"],
+    },
   },
   {
-    id: "mcp-system",
-    title: "MCP Integration System",
+    id: "financial_researcher",
+    title: "Financial Researcher",
     description:
-      "I built Model Context Protocol infrastructure that enables seamless AI-to-tool communication across distributed systems.",
+      "I built a verification-first financial research crew that gathers current company evidence and turns it into a focused, structured business report.",
     category: "ai",
-    tags: ["MCP", "API", "Integration"],
-    hue: "290",
-    image: "/assets/projects/story-development.jpg",
-    imageAlt: "Development workspace",
+    href: "/work/ai/financial_researcher",
+    cta: "Launch system",
+    tags: ["CrewAI", "Web Research", "Analysis"],
+    hue: "158",
+    visual: {
+      code: "FR",
+      stages: ["Verifier", "Researcher", "Analyst"],
+    },
+  },
+  {
+    id: "stock_picker",
+    title: "Stock Picker",
+    description:
+      "I created a managed market-intelligence crew that finds trending companies in an industry, compares the candidates, and explains its final selection.",
+    category: "ai",
+    href: "/work/ai/stock_picker",
+    cta: "Launch system",
+    tags: ["CrewAI", "Market Intelligence", "Agents"],
+    hue: "235",
+    visual: {
+      code: "SP",
+      stages: ["Scanner", "Researcher", "Selector"],
+    },
   },
 ];
 
@@ -865,6 +914,91 @@ function Philosophy() {
 
 // ── Project card ──────────────────────────────────────────────────────────────
 
+function AgentSystemPreview({ project }: { project: Project }) {
+  const icons = {
+    debate: Scale,
+    engineering_team: Code2,
+    financial_researcher: LineChart,
+    stock_picker: Radar,
+  };
+  const Icon = icons[project.id as keyof typeof icons] ?? BrainCircuit;
+  const stages = project.visual?.stages ?? [];
+
+  return (
+    <div className="absolute inset-0 flex flex-col justify-between p-5">
+      <div
+        className="absolute inset-0 opacity-[0.08]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.45) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+          maskImage: "linear-gradient(to bottom, black, transparent)",
+        }}
+      />
+      <div className="relative flex items-center justify-between">
+        <span
+          className="text-[9px] uppercase tracking-[0.24em]"
+          style={{ color: `hsla(${project.hue}, 82%, 72%, .72)` }}
+        >
+          Agentic system
+        </span>
+        <span className="flex items-center gap-1.5 text-[9px] uppercase tracking-[0.18em] text-white/24">
+          <span
+            className="size-1.5 rounded-full shadow-[0_0_10px_currentColor]"
+            style={{
+              color: `hsl(${project.hue}, 80%, 68%)`,
+              background: "currentColor",
+            }}
+          />
+          Online
+        </span>
+      </div>
+
+      <div className="relative flex items-center justify-center gap-2">
+        {stages.map((stage, index) => (
+          <div key={stage} className="contents">
+            <div className="min-w-0 text-center">
+              <div
+                className="mx-auto grid size-10 place-items-center rounded-full border font-mono text-[10px] transition duration-500 group-hover:scale-110"
+                style={{
+                  borderColor: `hsla(${project.hue}, 75%, 65%, .22)`,
+                  background: `hsla(${project.hue}, 75%, 55%, .07)`,
+                  color: `hsla(${project.hue}, 82%, 76%, .8)`,
+                }}
+              >
+                {index === 1 ? <Icon size={15} /> : `0${index + 1}`}
+              </div>
+              <div className="mt-2 max-w-16 truncate text-[9px] text-white/34">
+                {stage}
+              </div>
+            </div>
+            {index < stages.length - 1 && (
+              <div
+                className="mb-5 h-px w-6"
+                style={{
+                  background: `linear-gradient(90deg, hsla(${project.hue}, 75%, 65%, .45), hsla(${project.hue}, 75%, 65%, .08))`,
+                }}
+              />
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className="relative flex items-center justify-between border-t border-white/[0.055] pt-3">
+        <span className="font-mono text-[9px] tracking-[0.18em] text-white/20">
+          {project.visual?.code} / CREWAI
+        </span>
+        <span
+          className="text-[9px] tracking-[0.14em]"
+          style={{ color: `hsla(${project.hue}, 82%, 72%, .55)` }}
+        >
+          READY
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function ProjectCard({ project }: { project: Project }) {
   const containsLogo = project.imageFit === "contain";
 
@@ -889,18 +1023,22 @@ function ProjectCard({ project }: { project: Project }) {
             `radial-gradient(ellipse at 40% 40%, hsla(${project.hue}, 70%, 45%, 0.13) 0%, transparent 65%), rgba(10,10,22,0.9)`,
         }}
       >
-        <img
-          src={project.image}
-          alt={project.imageAlt}
-          loading="lazy"
-          className={`absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-[1.04] ${
-            containsLogo ? "object-contain p-8" : "object-cover opacity-80"
-          }`}
-          style={{
-            filter: containsLogo ? "none" : "saturate(0.75) contrast(1.08)",
-          }}
-        />
-        {!containsLogo && (
+        {project.visual ? (
+          <AgentSystemPreview project={project} />
+        ) : project.image ? (
+          <img
+            src={project.image}
+            alt={project.imageAlt ?? ""}
+            loading="lazy"
+            className={`absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-[1.04] ${
+              containsLogo ? "object-contain p-8" : "object-cover opacity-80"
+            }`}
+            style={{
+              filter: containsLogo ? "none" : "saturate(0.75) contrast(1.08)",
+            }}
+          />
+        ) : null}
+        {!project.visual && !containsLogo && (
           <>
             <div
               className="absolute inset-0"
@@ -918,7 +1056,7 @@ function ProjectCard({ project }: { project: Project }) {
             />
           </>
         )}
-        {!project.url && (
+        {!project.url && !project.href && !project.visual && (
           <span
             className="text-white/10 text-[10px] tracking-[0.3em] uppercase z-10"
             style={{ fontFamily: "var(--font-body)" }}
@@ -952,11 +1090,24 @@ function ProjectCard({ project }: { project: Project }) {
           {project.title}
         </h3>
         <p
-          className="text-sm text-white/38 leading-[1.7] mb-5"
+          className="text-sm text-white/38 leading-[1.7] mb-5 line-clamp-4"
           style={{ fontFamily: "var(--font-body)" }}
         >
           {project.description}
         </p>
+        {project.href && (
+          <Link
+            href={project.href}
+            className="mt-auto inline-flex items-center gap-2 text-[11px] text-white/35 transition-colors duration-200 hover:text-white/80 group/lnk"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            {project.cta ?? "View project"}
+            <ArrowRight
+              size={11}
+              className="transition-transform duration-200 group-hover/lnk:translate-x-1"
+            />
+          </Link>
+        )}
         {project.url && (
           <a
             href={project.url}
@@ -1074,7 +1225,7 @@ function Work() {
 
   const filteredProjects =
     filter === "all"
-      ? [...WEB_PROJECTS, ...AI_PROJECTS]
+      ? [...AI_PROJECTS, ...WEB_PROJECTS]
       : filter === "web"
       ? WEB_PROJECTS
       : filter === "ai"
@@ -1117,6 +1268,7 @@ function Work() {
               <button
                 key={f.key}
                 onClick={() => selectFilter(f.key)}
+                aria-pressed={filter === f.key}
                 className="px-5 py-2 rounded-full text-sm transition-all duration-300"
                 style={{
                   background:
