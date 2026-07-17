@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
-import { X, ArrowUpRight, Send, ChevronDown, Sparkles, ExternalLink, Gauge, Dumbbell, BrainCircuit, PenTool } from "lucide-react";
+import { X, ArrowUpRight, Send, ChevronDown, Sparkles, Gauge, Dumbbell, BrainCircuit, PenTool } from "lucide-react";
+import { contact } from "@/data/shayan/contact";
 import { emitSceneReaction } from "@/lib/three/sceneEvents";
 
 const BackgroundScene = dynamic(
@@ -29,6 +30,8 @@ interface Project {
   hue: string;
   image: string;
   imageAlt: string;
+  imageFit?: "cover" | "contain";
+  imageBackground?: string;
 }
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -38,109 +41,123 @@ const WEB_PROJECTS: Project[] = [
     id: "corporate-lens",
     title: "The Corporate Lens",
     description:
-      "I built a media platform that redefines corporate storytelling through precision editorial design and investigative content.",
+      "I designed and developed a premium corporate media platform for Pakistan's business landscape, pairing trusted reporting with a refined editorial experience.",
     category: "web",
     url: "https://thecorporatelens.com",
-    tags: ["Editorial", "CMS", "Next.js"],
+    tags: ["Next.js", "TypeScript", "Editorial"],
     hue: "210",
-    image: "/assets/projects/project-editorial.jpg",
-    imageAlt: "Editorial newspaper on a desk",
+    image: "/assets/projects/logos/corporate-lens.png",
+    imageAlt: "The Corporate Lens logo",
+    imageBackground: "#fbbf24",
   },
   {
     id: "euphoric",
     title: "Euphoric",
     description:
-      "I built a premium lifestyle brand experience for the Pakistani market: bold, expressive, and culturally resonant.",
+      "I designed a luxury fragrance storefront for men's, women's, and unisex perfume impressions, with immersive storytelling and refined product discovery.",
     category: "web",
     url: "https://euphoric.pk",
-    tags: ["E-Commerce", "Shopify", "Brand"],
+    tags: ["Next.js", "Tailwind CSS", "Headless Commerce"],
     hue: "270",
-    image: "/assets/projects/project-lifestyle.jpg",
-    imageAlt: "Colourful fashion rail",
+    image: "/assets/projects/logos/euphoric.png",
+    imageAlt: "Euphoric logo",
+    imageFit: "contain",
+    imageBackground: "#f4f2f3",
   },
   {
     id: "betterlife-studio",
-    title: "Better Life Sound Studio",
+    title: "Better Life",
     description:
-      "I created a booking and portfolio platform that connects artists with world-class recording facilities.",
+      "I designed a calm wellness-clinic website that explains Traditional Chinese Medicine treatments, introduces practitioners, shows pricing, and simplifies booking.",
     category: "web",
     url: "https://betterlife.soundstudio.pk",
-    tags: ["Booking", "React", "Audio"],
+    tags: ["TCM", "Healthcare", "Booking"],
     hue: "190",
-    image: "/assets/projects/project-audio.jpg",
-    imageAlt: "Recording studio equipment",
+    image: "/assets/projects/logos/better-life.png",
+    imageAlt: "Better Life logo",
+    imageFit: "contain",
+    imageBackground: "#f4f7f5",
   },
   {
     id: "sound-studio",
-    title: "Sound Studio PK",
+    title: "Sound Studio",
     description:
-      "I built the flagship platform for Pakistan's professional recording and production ecosystem.",
+      "I built a clear, accessible website for Sound Studio, an audiology clinic in Karachi, using WordPress and Elementor to present its hearing-care services.",
     category: "web",
     url: "https://soundstudio.pk",
-    tags: ["Platform", "Full Stack", "UX"],
+    tags: ["WordPress", "Elementor", "Audiology"],
     hue: "160",
-    image: "/assets/projects/project-audio.jpg",
-    imageAlt: "Recording studio equipment",
+    image: "/assets/projects/logos/sound-studio.png",
+    imageAlt: "Sound Studio logo",
+    imageFit: "contain",
+    imageBackground: "#050505",
   },
   {
     id: "gwhs",
-    title: "GWHS",
+    title: "Gateway Health Services",
     description:
-      "I created a service-oriented web presence with streamlined UX designed for accessibility and trust.",
+      "I built a responsive dental-clinic website with WordPress, Elementor, and Astra, combining treatment information, educational content, and clear booking pathways.",
     category: "web",
     url: "https://gwhs.pk",
-    tags: ["Services", "WordPress", "SEO"],
+    tags: ["WordPress", "Elementor", "Astra"],
     hue: "35",
-    image: "/assets/projects/project-services.jpg",
-    imageAlt: "Modern interior detail",
+    image: "/assets/projects/logos/gwhs.webp",
+    imageAlt: "Gateway Health Services logo",
+    imageFit: "contain",
+    imageBackground: "#eceff1",
   },
   {
     id: "homecure",
     title: "HomeCure",
     description:
-      "I built a healthcare-at-home platform that connects patients with certified medical professionals across Pakistan.",
+      "I designed a reassuring healthcare website for Karachi's at-home diagnostic sample collection service, with clear hygiene, booking, and contact pathways.",
     category: "web",
     url: "https://homecure.com.pk",
-    tags: ["HealthTech", "React", "Node.js"],
+    tags: ["Healthcare", "Home Diagnostics", "Booking"],
     hue: "340",
-    image: "/assets/projects/project-healthcare.jpg",
-    imageAlt: "Healthcare consultation",
+    image: "/assets/projects/logos/homecure.png",
+    imageAlt: "HomeCure logo",
+    imageFit: "contain",
+    imageBackground: "#ffffff",
   },
   {
     id: "clearvoicehub",
     title: "ClearVoice Hub",
     description:
-      "I built a communication and customer engagement platform for clarity, speed, and scale.",
+      "I designed a welcoming website for speech therapy, public speaking, French, German, and certification programs, with clear consultation and enrolment pathways.",
     category: "web",
     url: "https://clearvoicehub.com",
-    tags: ["SaaS", "Communication", "TypeScript"],
+    tags: ["Speech Therapy", "Languages", "Education"],
     hue: "200",
-    image: "/assets/projects/project-network.jpg",
-    imageAlt: "Connected digital network",
+    image: "/assets/projects/logos/clearvoice-hub.png",
+    imageAlt: "ClearVoice Hub logo",
+    imageFit: "contain",
+    imageBackground: "#f4f7fb",
   },
   {
     id: "bait-us-salam",
     title: "Bait us Salam",
     description:
-      "I created a community-first platform celebrating Islamic values and culture through thoughtful digital design.",
+      "I built a premium Hajj and Umrah agency concept that organizes detailed packages into filters, comparisons, and inquiry flows with a respectful visual language.",
     category: "web",
     url: "https://bait-us-salam.vercel.app",
-    tags: ["Community", "Next.js", "i18n"],
+    tags: ["Next.js", "TypeScript", "Framer Motion"],
     hue: "140",
-    image: "/assets/projects/project-community.jpg",
-    imageAlt: "Mosque skyline at sunset",
+    image: "/assets/projects/logos/bait-us-salam.png",
+    imageAlt: "Bait Us Salam website",
   },
   {
-    id: "car-connect",
-    title: "Car Connect",
+    id: "safe-safar",
+    title: "Safe Safar",
     description:
-      "I built an automotive marketplace that brings buyers and sellers together through a refined, trust-first experience.",
+      "I built a privacy-first vehicle communication platform for Karachi that uses QR stickers to connect road users with owners without exposing phone numbers.",
     category: "web",
     url: "https://car-connect-rosy.vercel.app",
-    tags: ["Marketplace", "React", "Automotive"],
+    tags: ["Next.js", "QR Platform", "Privacy"],
     hue: "220",
-    image: "/assets/projects/project-automotive.jpg",
-    imageAlt: "Automotive detail on the road",
+    image: "/assets/projects/logos/safe-safar.png",
+    imageAlt: "Safe Safar logo",
+    imageBackground: "#201e1f",
   },
 ];
 
@@ -186,8 +203,8 @@ const GROWTH_BRANDS = [
   "Sound Studio",
   "HomeCure",
   "ClearVoice Hub",
-  "Car Connect",
-  "GWHS",
+  "Safe Safar",
+  "Gateway Health Services",
 ];
 
 const SUGGESTED_QUESTIONS = [
@@ -201,6 +218,71 @@ const CHAT_UNAVAILABLE_MESSAGE =
   "I could not respond just now. Please try again in a moment.";
 const CHAT_RATE_LIMIT_MESSAGE =
   "Too many requests were sent in a short period. Please wait briefly and try again.";
+
+const CONTACT_LINKS = {
+  email: {
+    label: "Email",
+    href: `mailto:${contact.email}`,
+  },
+  linkedin: {
+    label: "LinkedIn",
+    href: contact.linkedIn,
+  },
+  instagram: {
+    label: "Instagram",
+    href: contact.instagram,
+  },
+} as const;
+
+type ContactLinkKey = keyof typeof CONTACT_LINKS;
+
+function tokenizeContactLinks(text: string) {
+  return text
+    .replace(
+      /\[[^\]]+\]\(\s*mailto:hello@shayan\.patricians\.pk\s*\)|mailto:hello@shayan\.patricians\.pk|hello@shayan\.patricians\.pk/gi,
+      "{{contact:email}}"
+    )
+    .replace(
+      /\[[^\]]+\]\(\s*https?:\/\/(?:www\.)?linkedin\.com\/in\/shayan-batoaq-379a42246\/?\s*\)|(?:https?:\/\/)?(?:www\.)?linkedin\.com\/in\/shayan-batoaq-379a42246\/?/gi,
+      "{{contact:linkedin}}"
+    )
+    .replace(
+      /\[[^\]]+\]\(\s*https?:\/\/(?:www\.)?instagram\.com\/shayanbatoaq\/?\s*\)|(?:https?:\/\/)?(?:www\.)?instagram\.com\/shayanbatoaq\/?|@shayanbatoaq/gi,
+      "{{contact:instagram}}"
+    );
+}
+
+function ChatMessageText({ text }: { text: string }) {
+  const parts = tokenizeContactLinks(text).split(
+    /(\{\{contact:(?:email|linkedin|instagram)\}\})/g
+  );
+
+  return (
+    <span className="whitespace-pre-wrap">
+      {parts.map((part, index) => {
+        const match = part.match(/^\{\{contact:(email|linkedin|instagram)\}\}$/);
+        if (!match) return part;
+
+        const key = match[1] as ContactLinkKey;
+        const link = CONTACT_LINKS[key];
+        const isExternal = key !== "email";
+
+        return (
+          <a
+            key={`${key}-${index}`}
+            href={link.href}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+            className="inline-flex items-center gap-1 font-semibold text-[#78b7ff] underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
+          >
+            {link.label}
+            <ArrowUpRight size={12} aria-hidden="true" />
+          </a>
+        );
+      })}
+    </span>
+  );
+}
 
 // ── Hooks ─────────────────────────────────────────────────────────────────────
 
@@ -784,9 +866,11 @@ function Philosophy() {
 // ── Project card ──────────────────────────────────────────────────────────────
 
 function ProjectCard({ project }: { project: Project }) {
+  const containsLogo = project.imageFit === "contain";
+
   return (
     <div
-      className="group relative rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1.5"
+      className="group relative h-[460px] rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1.5 flex flex-col"
       onMouseEnter={() => emitSceneReaction("project-hover", 1)}
       onFocus={() => emitSceneReaction("project-hover", 0.8)}
       style={{
@@ -798,47 +882,43 @@ function ProjectCard({ project }: { project: Project }) {
     >
       {/* Screenshot area */}
       <div
-        className="aspect-[16/9] relative border-b border-white/[0.04] flex items-center justify-center overflow-hidden"
+        className="aspect-[16/9] shrink-0 relative border-b border-white/[0.04] flex items-center justify-center overflow-hidden"
         style={{
-          background: `radial-gradient(ellipse at 40% 40%, hsla(${project.hue}, 70%, 45%, 0.13) 0%, transparent 65%), rgba(10,10,22,0.9)`,
+          background:
+            project.imageBackground ??
+            `radial-gradient(ellipse at 40% 40%, hsla(${project.hue}, 70%, 45%, 0.13) 0%, transparent 65%), rgba(10,10,22,0.9)`,
         }}
       >
         <img
           src={project.image}
           alt={project.imageAlt}
           loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.04]"
-          style={{ filter: "saturate(0.75) contrast(1.08)" }}
-        />
-        <div
-          className="absolute inset-0"
+          className={`absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-[1.04] ${
+            containsLogo ? "object-contain p-8" : "object-cover opacity-80"
+          }`}
           style={{
-            background:
-              "linear-gradient(135deg, rgba(5,5,14,0.28), rgba(5,5,14,0.6))",
+            filter: containsLogo ? "none" : "saturate(0.75) contrast(1.08)",
           }}
         />
-        <div className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
-            backgroundSize: "28px 28px",
-          }}
-        />
-        {project.url ? (
-          <div className="text-center z-10">
+        {!containsLogo && (
+          <>
             <div
-              className="w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center mx-auto mb-2.5"
-              style={{ background: `hsla(${project.hue}, 60%, 40%, 0.15)` }}
-            >
-              <ExternalLink size={13} className="text-white/30" />
-            </div>
-            <span
-              className="text-white/18 text-[10px]"
-              style={{ fontFamily: "var(--font-body)" }}
-            >
-              {project.url.replace(/^https?:\/\//, "")}
-            </span>
-          </div>
-        ) : (
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(5,5,14,0.2), rgba(5,5,14,0.5))",
+              }}
+            />
+            <div
+              className="absolute inset-0 opacity-[0.04]"
+              style={{
+                backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+                backgroundSize: "28px 28px",
+              }}
+            />
+          </>
+        )}
+        {!project.url && (
           <span
             className="text-white/10 text-[10px] tracking-[0.3em] uppercase z-10"
             style={{ fontFamily: "var(--font-body)" }}
@@ -849,7 +929,7 @@ function ProjectCard({ project }: { project: Project }) {
       </div>
 
       {/* Content */}
-      <div className="p-6">
+      <div className="p-6 flex flex-1 flex-col">
         <div className="flex flex-wrap gap-1.5 mb-3.5">
           {project.tags.map((tag) => (
             <span
@@ -882,7 +962,7 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[11px] text-white/28 hover:text-white/65 transition-colors duration-200 group/lnk"
+            className="mt-auto inline-flex items-center gap-1.5 text-[11px] text-white/28 hover:text-white/65 transition-colors duration-200 group/lnk"
             style={{ fontFamily: "var(--font-body)" }}
           >
             Visit site
@@ -977,20 +1057,22 @@ function DigitalGrowth() {
 
 function Work() {
   const [filter, setFilter] = useState<WorkFilter>("all");
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   const selectFilter = (nextFilter: WorkFilter) => {
     setFilter(nextFilter);
+    setShowAllProjects(false);
     emitSceneReaction("filter-change", nextFilter === "all" ? 0.7 : 1);
   };
 
   const filters: { key: WorkFilter; label: string }[] = [
     { key: "all", label: "All" },
-    { key: "web", label: "Web Engineering" },
+    { key: "web", label: "Web Development" },
     { key: "ai", label: "AI Systems" },
     { key: "growth", label: "Digital Growth" },
   ];
 
-  const visibleProjects =
+  const filteredProjects =
     filter === "all"
       ? [...WEB_PROJECTS, ...AI_PROJECTS]
       : filter === "web"
@@ -998,6 +1080,10 @@ function Work() {
       : filter === "ai"
       ? AI_PROJECTS
       : [];
+  const visibleProjects = showAllProjects
+    ? filteredProjects
+    : filteredProjects.slice(0, 6);
+  const canToggleProjects = filteredProjects.length > 6;
 
   return (
     <section id="work" className="py-32 px-6">
@@ -1053,13 +1139,45 @@ function Work() {
 
         {/* Content */}
         {filter !== "growth" ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {visibleProjects.map((project, i) => (
-              <Reveal key={project.id} delay={i * 55}>
-                <ProjectCard project={project} />
+          <>
+            <div
+              id="project-grid"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+            >
+              {visibleProjects.map((project, i) => (
+                <Reveal key={project.id} delay={i * 55} className="h-full">
+                  <ProjectCard project={project} />
+                </Reveal>
+              ))}
+            </div>
+
+            {canToggleProjects && (
+              <Reveal delay={120}>
+                <div className="flex justify-center mt-12">
+                  <button
+                    type="button"
+                    onClick={() => setShowAllProjects((current) => !current)}
+                    aria-expanded={showAllProjects}
+                    aria-controls="project-grid"
+                    className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-sm text-white/55 hover:text-white/90 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
+                    style={{
+                      background: "rgba(255,255,255,0.04)",
+                      border: "1px solid rgba(255,255,255,0.09)",
+                      fontFamily: "var(--font-body)",
+                    }}
+                  >
+                    {showAllProjects ? "Show less" : "Show more"}
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-300 ${
+                        showAllProjects ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                </div>
               </Reveal>
-            ))}
-          </div>
+            )}
+          </>
         ) : (
           <DigitalGrowth />
         )}
@@ -1215,7 +1333,7 @@ function Contact() {
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
-                  href="mailto:shayaanbatoaq@gmail.com"
+                  href={`mailto:${contact.email}`}
                   className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:opacity-90 hover:scale-[1.03] active:scale-[0.97]"
                   style={{
                     background: "linear-gradient(135deg, #1E90FF, #6A5ACD)",
@@ -1227,7 +1345,7 @@ function Contact() {
                   <ArrowUpRight size={14} />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/shayan-batoaq-379a42246"
+                  href={contact.linkedIn}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
@@ -1248,7 +1366,7 @@ function Contact() {
                   <ArrowUpRight size={14} />
                 </a>
                 <a
-                  href="https://www.instagram.com/shayanbatoaq/"
+                  href={contact.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
@@ -1549,7 +1667,11 @@ function AskModal({ onClose }: { onClose: () => void }) {
                       fontFamily: "var(--font-body)",
                     }}
                   >
-                    {msg.text}
+                    {msg.role === "ai" ? (
+                      <ChatMessageText text={msg.text} />
+                    ) : (
+                      msg.text
+                    )}
                   </div>
                 </div>
               ))}
