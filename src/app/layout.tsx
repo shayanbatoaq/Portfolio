@@ -1,23 +1,35 @@
 import type { Metadata } from "next";
+import {
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/lib/seo";
 import "../styles/index.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Shayan Batoaq | Portfolio",
+    default: SITE_TITLE,
     template: "%s | Shayan Batoaq",
   },
-  description:
-    "Portfolio of Shayan Batoaq - full-stack web development, agentic AI, automation, and digital products.",
+  description: SITE_DESCRIPTION,
   applicationName: "Shayan Batoaq Portfolio",
-  authors: [{ name: "Shayan Batoaq" }],
-  creator: "Shayan Batoaq",
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: "technology",
+  alternates: {
+    canonical: "/",
+  },
   keywords: [
     "Shayan Batoaq",
-    "full-stack web development",
-    "agentic AI",
-    "AI assistants",
-    "automation",
-    "portfolio",
+    "AI engineer Pakistan",
+    "full-stack developer Pakistan",
+    "agentic AI developer",
+    "CrewAI developer",
+    "Next.js developer",
+    "digital growth strategist",
   ],
   icons: {
     icon: "/icon.svg",
@@ -25,21 +37,37 @@ export const metadata: Metadata = {
     apple: "/icon.svg",
   },
   openGraph: {
-    title: "Shayan Batoaq | Portfolio",
-    description:
-      "Full-stack web development, agentic AI, automation, and digital products.",
-    siteName: "Shayan Batoaq Portfolio",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: "/",
+    siteName: SITE_NAME,
     type: "website",
+    locale: "en_PK",
+    images: [
+      {
+        url: "/og.png",
+        width: 1728,
+        height: 910,
+        alt: "Shayan Batoaq — AI Engineer and Full-Stack Developer",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
-    title: "Shayan Batoaq | Portfolio",
-    description:
-      "Full-stack web development, agentic AI, automation, and digital products.",
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/og.png"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 

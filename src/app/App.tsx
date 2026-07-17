@@ -556,9 +556,13 @@ function Hero({ onAskClick }: { onAskClick: () => void }) {
 
         <Reveal delay={80}>
           <h1 className="mb-14 flex justify-center select-none">
+            <span className="sr-only">
+              Shayan Batoaq — AI Engineer, Full-Stack Developer, and Digital Growth Strategist
+            </span>
             <img
               src="/assets/shayan-batoaq-logo.png"
-              alt="Shayan Batoaq"
+              alt=""
+              aria-hidden="true"
               width={1597}
               height={256}
               className="h-auto w-full max-w-[1024px]"
@@ -586,7 +590,7 @@ function Hero({ onAskClick }: { onAskClick: () => void }) {
             className="max-w-lg mx-auto text-base text-white/35 leading-[1.75] mb-12"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            I am a full stack developer and AI engineer creating intelligent digital experiences inspired by precision, curiosity, and thoughtful design.
+            I&apos;m Shayan Batoaq, a full-stack developer and AI engineer creating intelligent digital experiences inspired by precision, curiosity, and thoughtful design.
           </p>
         </Reveal>
 
