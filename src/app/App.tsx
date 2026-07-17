@@ -1,7 +1,14 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import dynamic from "next/dynamic";
 import { X, ArrowUpRight, Send, ChevronDown, Sparkles, ExternalLink, Gauge, Dumbbell, BrainCircuit, PenTool } from "lucide-react";
+import { emitSceneReaction } from "@/lib/three/sceneEvents";
+
+const BackgroundScene = dynamic(
+  () => import("@/components/three/BackgroundScene"),
+  { ssr: false }
+);
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -780,6 +787,8 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <div
       className="group relative rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1.5"
+      onMouseEnter={() => emitSceneReaction("project-hover", 1)}
+      onFocus={() => emitSceneReaction("project-hover", 0.8)}
       style={{
         background: "rgba(9,9,19,0.75)",
         border: "1px solid rgba(255,255,255,0.06)",
@@ -969,6 +978,11 @@ function DigitalGrowth() {
 function Work() {
   const [filter, setFilter] = useState<WorkFilter>("all");
 
+  const selectFilter = (nextFilter: WorkFilter) => {
+    setFilter(nextFilter);
+    emitSceneReaction("filter-change", nextFilter === "all" ? 0.7 : 1);
+  };
+
   const filters: { key: WorkFilter; label: string }[] = [
     { key: "all", label: "All" },
     { key: "web", label: "Web Engineering" },
@@ -1016,7 +1030,7 @@ function Work() {
             {filters.map((f) => (
               <button
                 key={f.key}
-                onClick={() => setFilter(f.key)}
+                onClick={() => selectFilter(f.key)}
                 className="px-5 py-2 rounded-full text-sm transition-all duration-300"
                 style={{
                   background:
@@ -1111,6 +1125,10 @@ function Patricians() {
                   href="https://patricians.pk"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onMouseEnter={() =>
+                    emitSceneReaction("patricians-hover", 1)
+                  }
+                  onFocus={() => emitSceneReaction("patricians-hover", 1)}
                   className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:opacity-90 hover:scale-[1.03] active:scale-[0.97]"
                   style={{
                     background: "linear-gradient(135deg, #1E90FF, #6A0DAD)",
@@ -1130,6 +1148,12 @@ function Patricians() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Visit Patricians"
+                  onMouseEnter={() =>
+                    emitSceneReaction("patricians-hover", 1.15)
+                  }
+                  onFocus={() =>
+                    emitSceneReaction("patricians-hover", 1.15)
+                  }
                   className="w-52 h-52 rounded-2xl flex flex-col items-center justify-center"
                   style={{
                     background: "rgba(255,255,255,0.98)",
@@ -1300,6 +1324,7 @@ function AskModal({ onClose }: { onClose: () => void }) {
   const sendMessage = useCallback(
     async (text: string) => {
       if (!text.trim() || typing) return;
+      emitSceneReaction("message-submit", 1);
       const nextMessages = [
         ...messages,
         { role: "user" as const, text: text.trim() },
@@ -1355,6 +1380,9 @@ function AskModal({ onClose }: { onClose: () => void }) {
           ...current,
           { role: "ai", text: reply },
         ]);
+        if (reply.length > 280) {
+          emitSceneReaction("chat-reading", 1);
+        }
       } catch (error) {
         if (error instanceof Error && error.name === "AbortError") return;
 
@@ -1374,8 +1402,8 @@ function AskModal({ onClose }: { onClose: () => void }) {
     <div
       className="fixed inset-0 z-[100] flex flex-col"
       style={{
-        background: "rgba(5,5,14,0.97)",
-        backdropFilter: "blur(24px)",
+        background: "rgba(5,5,14,0.9)",
+        backdropFilter: "blur(18px)",
       }}
     >
       {/* Header */}
@@ -1650,6 +1678,7 @@ export default function App() {
   // Prevent body scroll when modal is open
   useEffect(() => {
     document.body.style.overflow = askOpen ? "hidden" : "";
+    if (askOpen) emitSceneReaction("chat-open", 1);
     return () => {
       document.body.style.overflow = "";
     };
@@ -1657,16 +1686,19 @@ export default function App() {
 
   return (
     <div
-      className="min-h-screen w-full"
+      className="relative isolate min-h-screen w-full"
       style={{ background: "var(--background)", color: "var(--foreground)" }}
     >
-      <Nav />
-      <Hero onAskClick={() => setAskOpen(true)} />
-      <About />
-      <Philosophy />
-      <Work />
-      <Patricians />
-      <Contact />
+      <BackgroundScene chatOpen={askOpen} />
+      <div className="relative z-10">
+        <Nav />
+        <Hero onAskClick={() => setAskOpen(true)} />
+        <About />
+        <Philosophy />
+        <Work />
+        <Patricians />
+        <Contact />
+      </div>
 
       <AskButton onClick={() => setAskOpen(true)} />
       {askOpen && <AskModal onClose={() => setAskOpen(false)} />}
