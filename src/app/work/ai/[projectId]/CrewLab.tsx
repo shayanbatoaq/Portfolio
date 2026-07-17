@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 
 import type { CrewProject } from "@/lib/crews/projects";
+import { PortfolioNav } from "@/components/navigation/PortfolioNav";
 
 type CrewRun = {
   ok: boolean;
@@ -399,18 +400,11 @@ export default function CrewLab({ project, projects }: Props) {
         style={{ background: `rgba(${project.accentRgb}, 0.12)` }}
       />
 
-      <header className="relative z-20 border-b border-white/[0.06] bg-[#07070f]/75 backdrop-blur-2xl">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-5 px-5 sm:px-8">
-          <Link href="/" aria-label="Shayan Batoaq home">
-            <img
-              src="/assets/shayan-batoaq-logo.png"
-              alt="Shayan Batoaq"
-              width={1597}
-              height={256}
-              className="h-auto w-36 sm:w-40"
-            />
-          </Link>
-          <div className="hidden items-center gap-2 text-[10px] uppercase tracking-[0.24em] text-white/30 sm:flex">
+      <PortfolioNav />
+
+      <header className="relative z-20 border-b border-white/[0.06] bg-[#07070f]/75 pt-24 backdrop-blur-2xl">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-5 px-5 sm:px-8">
+          <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-white/30 sm:tracking-[0.24em]">
             <span className="relative flex size-2">
               <span
                 className="absolute inline-flex size-full animate-ping rounded-full opacity-60"
@@ -421,7 +415,8 @@ export default function CrewLab({ project, projects }: Props) {
                 style={{ backgroundColor: project.accent }}
               />
             </span>
-            Agent systems online
+            <span className="hidden sm:inline">Agent systems online</span>
+            <span className="sm:hidden">Systems online</span>
           </div>
           <Link
             href="/#work"

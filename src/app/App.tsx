@@ -1,8 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useSyncExternalStore,
+} from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   X,
   ArrowUpRight,
@@ -21,6 +28,8 @@ import {
 } from "lucide-react";
 import { contact } from "@/data/shayan/contact";
 import { emitSceneReaction } from "@/lib/three/sceneEvents";
+import { BrandSystemsSection } from "@/components/work/brand-systems/BrandSystemsSection";
+import { PortfolioNav } from "@/components/navigation/PortfolioNav";
 
 const BackgroundScene = dynamic(
   () => import("@/components/three/BackgroundScene"),
@@ -29,7 +38,22 @@ const BackgroundScene = dynamic(
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-type WorkFilter = "all" | "web" | "ai" | "growth";
+type WorkFilter = "web" | "ai" | "brand";
+
+const getWorkFilterFromLocation = (): WorkFilter => {
+  if (typeof window === "undefined") return "web";
+  const requestedFilter = new URLSearchParams(window.location.search).get(
+    "work",
+  );
+  return requestedFilter === "ai" || requestedFilter === "brand"
+    ? requestedFilter
+    : "web";
+};
+
+const subscribeToWorkLocation = (onStoreChange: () => void) => {
+  window.addEventListener("popstate", onStoreChange);
+  return () => window.removeEventListener("popstate", onStoreChange);
+};
 
 interface Message {
   role: "user" | "ai";
@@ -244,16 +268,6 @@ const AI_PROJECTS: Project[] = [
       stages: ["Scanner", "Researcher", "Selector"],
     },
   },
-];
-
-const GROWTH_BRANDS = [
-  "The Corporate Lens",
-  "Euphoric",
-  "Sound Studio",
-  "HomeCure",
-  "ClearVoice Hub",
-  "Safe Safar",
-  "Gateway Health Services",
 ];
 
 const SUGGESTED_QUESTIONS = [
@@ -1128,109 +1142,37 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-// ── Digital Growth ────────────────────────────────────────────────────────────
-
-function DigitalGrowth() {
-  const services = [
-    { label: "Brand Strategy", desc: "I build identity systems designed to compound." },
-    { label: "SEO", desc: "I create content that earns authority, not just traffic." },
-    { label: "Performance", desc: "I focus on speed and conversion metrics that actually matter." },
-    { label: "Analytics", desc: "I interpret data as narrative, not noise." },
-    { label: "Social Campaigns", desc: "I create stories worth sharing and campaigns worth running." },
-    { label: "Creative Direction", desc: "I shape visual language that speaks before words do." },
-  ];
-
-  return (
-    <div className="space-y-10">
-      <Reveal>
-        <p
-          className="text-lg text-white/38 font-light max-w-2xl leading-[1.8]"
-          style={{ fontFamily: "var(--font-body)" }}
-        >
-          I treat digital growth as a practice, not a service offering. I start by understanding what a brand stands for, then engineer the conditions for it to be discovered, recognized, and remembered.
-        </p>
-      </Reveal>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {services.map((s, i) => (
-          <Reveal key={s.label} delay={i * 55}>
-            <div
-              className="p-6 rounded-2xl border border-white/[0.055] hover:border-white/10 transition-all duration-300"
-              style={{ background: "rgba(9,9,19,0.7)" }}
-            >
-              <p
-                className="text-[10px] tracking-[0.28em] text-white/25 uppercase mb-2.5"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                {s.label}
-              </p>
-              <p
-                className="text-white/55 text-sm leading-[1.65]"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                {s.desc}
-              </p>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-
-      <Reveal delay={100}>
-        <div>
-          <p
-            className="text-[10px] tracking-[0.3em] text-white/20 uppercase mb-5"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            Brands I've Grown
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {GROWTH_BRANDS.map((brand) => (
-              <span
-                key={brand}
-                className="px-4 py-2 rounded-full text-sm text-white/45 hover:text-white/75 hover:border-white/15 transition-all duration-300 cursor-default"
-                style={{
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(255,255,255,0.07)",
-                  fontFamily: "var(--font-body)",
-                }}
-              >
-                {brand}
-              </span>
-            ))}
-          </div>
-        </div>
-      </Reveal>
-    </div>
-  );
-}
-
 // ── Work ──────────────────────────────────────────────────────────────────────
 
 function Work() {
-  const [filter, setFilter] = useState<WorkFilter>("all");
+  const locationFilter = useSyncExternalStore(
+    subscribeToWorkLocation,
+    getWorkFilterFromLocation,
+    () => "web",
+  );
+  const [selectedFilter, setSelectedFilter] = useState<WorkFilter | null>(null);
+  const filter = selectedFilter ?? locationFilter;
   const [showAllProjects, setShowAllProjects] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   const selectFilter = (nextFilter: WorkFilter) => {
-    setFilter(nextFilter);
+    setSelectedFilter(nextFilter);
     setShowAllProjects(false);
-    emitSceneReaction("filter-change", nextFilter === "all" ? 0.7 : 1);
+    emitSceneReaction("filter-change", 1);
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("work", nextFilter);
+    window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
   };
 
   const filters: { key: WorkFilter; label: string }[] = [
-    { key: "all", label: "All" },
-    { key: "web", label: "Web Development" },
+    { key: "web", label: "Websites" },
     { key: "ai", label: "AI Systems" },
-    { key: "growth", label: "Digital Growth" },
+    { key: "brand", label: "Digital Growth" },
   ];
 
   const filteredProjects =
-    filter === "all"
-      ? [...AI_PROJECTS, ...WEB_PROJECTS]
-      : filter === "web"
-      ? WEB_PROJECTS
-      : filter === "ai"
-      ? AI_PROJECTS
-      : [];
+    filter === "web" ? WEB_PROJECTS : filter === "ai" ? AI_PROJECTS : [];
   const visibleProjects = showAllProjects
     ? filteredProjects
     : filteredProjects.slice(0, 6);
@@ -1263,13 +1205,52 @@ function Work() {
 
         {/* Filter tabs */}
         <Reveal delay={80}>
-          <div className="flex flex-wrap gap-2.5 mb-14">
+          <div
+            className="flex flex-wrap gap-2.5 mb-14"
+            role="tablist"
+            aria-label="Work disciplines"
+          >
             {filters.map((f) => (
               <button
                 key={f.key}
+                id={`work-tab-${f.key}`}
+                type="button"
+                role="tab"
                 onClick={() => selectFilter(f.key)}
-                aria-pressed={filter === f.key}
-                className="px-5 py-2 rounded-full text-sm transition-all duration-300"
+                onKeyDown={(event) => {
+                  if (
+                    !["ArrowLeft", "ArrowRight", "Home", "End"].includes(
+                      event.key,
+                    )
+                  ) {
+                    return;
+                  }
+
+                  event.preventDefault();
+                  const currentIndex = filters.findIndex(
+                    (item) => item.key === f.key,
+                  );
+                  const nextIndex =
+                    event.key === "Home"
+                      ? 0
+                      : event.key === "End"
+                        ? filters.length - 1
+                        : (currentIndex +
+                            (event.key === "ArrowRight" ? 1 : -1) +
+                            filters.length) %
+                          filters.length;
+                  const nextFilter = filters[nextIndex];
+                  selectFilter(nextFilter.key);
+                  window.requestAnimationFrame(() => {
+                    document
+                      .getElementById(`work-tab-${nextFilter.key}`)
+                      ?.focus();
+                  });
+                }}
+                aria-selected={filter === f.key}
+                aria-controls="work-category-panel"
+                tabIndex={filter === f.key ? 0 : -1}
+                className="px-5 py-2 rounded-full text-sm transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07070f]"
                 style={{
                   background:
                     filter === f.key
@@ -1290,49 +1271,66 @@ function Work() {
         </Reveal>
 
         {/* Content */}
-        {filter !== "growth" ? (
-          <>
-            <div
-              id="project-grid"
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+        <div
+          id="work-category-panel"
+          role="tabpanel"
+          aria-labelledby={`work-tab-${filter}`}
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={filter}
+              initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduceMotion ? { opacity: 1 } : { opacity: 0, y: -6 }}
+              transition={{ duration: reduceMotion ? 0 : 0.22, ease: "easeOut" }}
             >
-              {visibleProjects.map((project, i) => (
-                <Reveal key={project.id} delay={i * 55} className="h-full">
-                  <ProjectCard project={project} />
-                </Reveal>
-              ))}
-            </div>
-
-            {canToggleProjects && (
-              <Reveal delay={120}>
-                <div className="flex justify-center mt-12">
-                  <button
-                    type="button"
-                    onClick={() => setShowAllProjects((current) => !current)}
-                    aria-expanded={showAllProjects}
-                    aria-controls="project-grid"
-                    className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-sm text-white/55 hover:text-white/90 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
-                    style={{
-                      background: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(255,255,255,0.09)",
-                      fontFamily: "var(--font-body)",
-                    }}
+              {filter !== "brand" ? (
+                <>
+                  <div
+                    id="project-grid"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
                   >
-                    {showAllProjects ? "Show less" : "Show more"}
-                    <ChevronDown
-                      size={14}
-                      className={`transition-transform duration-300 ${
-                        showAllProjects ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-                </div>
-              </Reveal>
-            )}
-          </>
-        ) : (
-          <DigitalGrowth />
-        )}
+                    {visibleProjects.map((project, i) => (
+                      <Reveal key={project.id} delay={i * 55} className="h-full">
+                        <ProjectCard project={project} />
+                      </Reveal>
+                    ))}
+                  </div>
+
+                  {canToggleProjects && (
+                    <Reveal delay={120}>
+                      <div className="flex justify-center mt-12">
+                        <button
+                          type="button"
+                          onClick={() => setShowAllProjects((current) => !current)}
+                          aria-expanded={showAllProjects}
+                          aria-controls="project-grid"
+                          className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-sm text-white/55 hover:text-white/90 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+                          style={{
+                            background: "rgba(255,255,255,0.04)",
+                            border: "1px solid rgba(255,255,255,0.09)",
+                            fontFamily: "var(--font-body)",
+                          }}
+                        >
+                          {showAllProjects ? "Show less" : "Show more"}
+                          <ChevronDown
+                            size={14}
+                            aria-hidden="true"
+                            className={`transition-transform duration-300 ${
+                              showAllProjects ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </Reveal>
+                  )}
+                </>
+              ) : (
+                <BrandSystemsSection />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );
@@ -1965,7 +1963,7 @@ export default function App() {
     >
       <BackgroundScene chatOpen={askOpen} />
       <div className="relative z-10">
-        <Nav />
+        <PortfolioNav />
         <Hero onAskClick={() => setAskOpen(true)} />
         <About />
         <Philosophy />
