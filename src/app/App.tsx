@@ -651,8 +651,8 @@ const aboutTopics = [
     gradFrom: "rgba(30,144,255,0.12)",
     gradTo: "rgba(79,123,255,0.06)",
     reverse: false,
-    image: "/assets/projects/story-development.jpg",
-    imageAlt: "Laptop with a code editor at a development workspace",
+    image: "/assets/projects/story-development-custom.webp",
+    imageAlt: "Layered digital architecture representing full-stack development",
     imageContain: false,
   },
   {
@@ -662,8 +662,8 @@ const aboutTopics = [
     gradFrom: "rgba(106,90,205,0.12)",
     gradTo: "rgba(138,43,226,0.06)",
     reverse: true,
-    image: "/assets/projects/story-ai.jpg",
-    imageAlt: "Close-up of artificial intelligence circuitry",
+    image: "/assets/projects/story-ai-custom.webp",
+    imageAlt: "Connected reasoning nodes representing an agentic AI system",
     imageContain: false,
   },
   {
@@ -673,8 +673,8 @@ const aboutTopics = [
     gradFrom: "rgba(106,10,173,0.12)",
     gradTo: "rgba(138,43,226,0.06)",
     reverse: false,
-    image: "/assets/projects/story-growth.jpg",
-    imageAlt: "Digital analytics on a laptop screen",
+    image: "/assets/projects/story-growth-custom.webp",
+    imageAlt: "Luminous data streams converging into sustained digital growth",
     imageContain: false,
   },
   {
