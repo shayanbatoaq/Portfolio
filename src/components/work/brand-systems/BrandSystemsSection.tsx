@@ -6,19 +6,19 @@ export function BrandSystemsSection() {
     <div className="brand-systems-section">
       <header className="brand-system-enter mb-10 max-w-3xl sm:mb-14">
         <p className="mb-3 text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-blue-300/65">
-          Connected growth systems
+          Client brand and campaign work
         </p>
         <h3 className="text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">
-          Digital Growth
+          Brand &amp; Marketing
         </h3>
         <p className="mt-5 hidden max-w-2xl text-base leading-7 text-white/52 sm:block">
-          Strategy becomes visible here: brand marks anchor distinctive feeds,
-          campaign ideas turn into repeatable content, and every platform works
-          as part of one recognizable digital presence.
+          Selected client work across brand positioning, social content,
+          creative direction, and Meta campaigns. These case studies document
+          the work itself without claiming unpublished performance results.
         </p>
         <p className="mt-4 text-sm leading-6 text-white/52 sm:hidden">
-          Brand identities brought to life through content, platforms, visuals,
-          and campaigns.
+          Selected client work across brand direction, social content, and
+          campaigns, without unpublished performance claims.
         </p>
       </header>
 

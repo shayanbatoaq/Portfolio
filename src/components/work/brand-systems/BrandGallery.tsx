@@ -172,7 +172,7 @@ export function BrandGallery({ assets, brandName, section }: BrandGalleryProps) 
       </div>
 
       <p className="mb-8 max-w-2xl text-xs leading-5 text-white/32">
-        Selected public-facing creative from the client&apos;s live social presence.
+        Selected public-facing creative produced for the brand&apos;s social presence.
       </p>
 
       <div className="brand-gallery columns-1 gap-4 sm:columns-2 lg:columns-3">

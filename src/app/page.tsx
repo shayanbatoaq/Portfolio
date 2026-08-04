@@ -34,12 +34,14 @@ const structuredData = [
     email: `mailto:${contact.email}`,
     sameAs: [contact.linkedIn, contact.instagram],
     knowsAbout: [
-      "Agentic AI systems",
+      "Applied AI prototypes",
+      "AI workflow prototyping",
       "CrewAI",
       "Full-stack web development",
       "Next.js",
       "TypeScript",
-      "Digital growth",
+      "Client-facing web development",
+      "Digital marketing and brand communication",
     ],
     worksFor: {
       "@type": "Organization",

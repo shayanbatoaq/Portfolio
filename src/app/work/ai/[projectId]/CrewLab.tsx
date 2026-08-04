@@ -334,7 +334,7 @@ export default function CrewLab({ project, projects }: Props) {
           durationMs: 0,
           stdout: "",
           stderr: "",
-          error: data.error ?? "The crew could not be started.",
+          error: data.error ?? "The workflow could not be started.",
         });
         return;
       }
@@ -350,7 +350,7 @@ export default function CrewLab({ project, projects }: Props) {
         error:
           error instanceof Error
             ? error.message
-            : "The system could not reach the agent runtime.",
+            : "The prototype could not reach its runtime.",
       });
     } finally {
       setIsSubmitting(false);
@@ -415,8 +415,8 @@ export default function CrewLab({ project, projects }: Props) {
                 style={{ backgroundColor: project.accent }}
               />
             </span>
-            <span className="hidden sm:inline">Agent systems online</span>
-            <span className="sm:hidden">Systems online</span>
+            <span className="hidden sm:inline">Portfolio AI labs</span>
+            <span className="sm:hidden">AI labs</span>
           </div>
           <Link
             href="/#work"
@@ -430,7 +430,7 @@ export default function CrewLab({ project, projects }: Props) {
 
       <main className="relative z-10 mx-auto max-w-7xl px-5 pb-20 pt-8 sm:px-8 sm:pt-12">
         <nav
-          aria-label="AI systems"
+          aria-label="AI workflow prototypes"
           className={`flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none] ${
             activeJob ? "mb-5" : "mb-12"
           }`}
@@ -520,7 +520,7 @@ export default function CrewLab({ project, projects }: Props) {
               className="mb-5 text-[10px] uppercase tracking-[0.34em]"
               style={{ color: project.accent }}
             >
-              System {project.number} · {project.eyebrow}
+              Prototype {project.number} · {project.eyebrow}
             </div>
             <h1
               className="max-w-4xl text-5xl font-bold leading-[0.94] tracking-[-0.045em] text-white sm:text-6xl lg:text-7xl"
@@ -542,7 +542,7 @@ export default function CrewLab({ project, projects }: Props) {
           <div className="rounded-3xl border border-white/[0.07] bg-white/[0.025] p-5 backdrop-blur-xl sm:p-6">
             <div className="mb-5 flex items-center justify-between">
               <span className="text-[10px] uppercase tracking-[0.25em] text-white/28">
-                Agent flow
+                Workflow stages
               </span>
               <Sparkles size={15} style={{ color: project.accent }} />
             </div>
@@ -594,7 +594,7 @@ export default function CrewLab({ project, projects }: Props) {
                   className="mt-2 text-xl font-semibold text-white"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                  Brief the crew
+                  Brief the workflow
                 </h2>
               </div>
               <TerminalSquare size={19} className="text-white/22" />
@@ -683,17 +683,17 @@ export default function CrewLab({ project, projects }: Props) {
                   <Play size={15} fill="currentColor" />
                 )}
                 {isSubmitting
-                  ? "Starting crew"
+                  ? "Starting workflow"
                   : isCurrentProjectRunning
-                    ? "Crew in progress"
+                    ? "Workflow in progress"
                     : activeJob
-                      ? `${activeProject?.name ?? "Another crew"} is running`
+                      ? `${activeProject?.name ?? "Another prototype"} is running`
                       : `Run ${project.name}`}
               </button>
             </form>
 
             <p className="mt-4 text-center text-[10px] leading-4 text-white/20">
-              Live agent runs can take several minutes while research and review stages complete.
+              Prototype runs can take several minutes while their stages complete.
             </p>
           </div>
 
@@ -708,7 +708,7 @@ export default function CrewLab({ project, projects }: Props) {
                     className="text-lg font-semibold text-white"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
-                    System output
+                    Prototype output
                   </h2>
                   {run && (
                     <span
@@ -729,11 +729,11 @@ export default function CrewLab({ project, projects }: Props) {
                 </div>
                 <p className="mt-1 text-xs text-white/25" aria-live="polite">
                   {isCurrentProjectRunning
-                    ? "Agents are collaborating…"
+                    ? "Workflow stages are running…"
                     : run
                       ? `${run.ok ? "Finished" : "Ended"} ${formatDuration(run.durationMs)}`
                       : activeJob
-                        ? `${activeProject?.name ?? "Another system"} is running`
+                        ? `${activeProject?.name ?? "Another prototype"} is running`
                         : "Ready for a new run"}
                 </p>
               </div>
@@ -773,7 +773,7 @@ export default function CrewLab({ project, projects }: Props) {
                     className="mt-7 text-xl font-semibold text-white"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
-                    The crew is thinking
+                    The workflow is running
                   </h3>
                   <p className="mt-2 text-sm leading-6 text-white/32">
                     {project.stages.map((stage) => stage.label).join(" → ")}
@@ -819,7 +819,7 @@ export default function CrewLab({ project, projects }: Props) {
                   <div className="mt-8 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.16em] text-white/18">
                     <span>Input</span>
                     <ArrowRight size={12} />
-                    <span>Agents</span>
+                    <span>Stages</span>
                     <ArrowRight size={12} />
                     <span>Result</span>
                   </div>

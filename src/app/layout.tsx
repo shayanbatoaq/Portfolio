@@ -26,10 +26,10 @@ export const metadata: Metadata = {
     "Shayan Batoaq",
     "AI engineer Pakistan",
     "full-stack developer Pakistan",
-    "agentic AI developer",
-    "CrewAI developer",
+    "applied AI developer",
+    "CrewAI portfolio projects",
     "Next.js developer",
-    "digital growth strategist",
+    "product-focused developer",
   ],
   icons: {
     icon: "/icon.svg",

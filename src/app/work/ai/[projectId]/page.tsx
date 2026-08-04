@@ -20,13 +20,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!project) return {};
 
   return {
-    title: `${project.name} — Agentic AI System`,
+    title: `${project.name} — AI Workflow Prototype`,
     description: project.description,
     alternates: {
       canonical: `/work/ai/${project.id}`,
     },
     openGraph: {
-      title: `${project.name} — Agentic AI System by Shayan Batoaq`,
+      title: `${project.name} — AI Workflow Prototype by Shayan Batoaq`,
       description: project.description,
       url: absoluteUrl(`/work/ai/${project.id}`),
       type: "website",
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.name} — Agentic AI System`,
+      title: `${project.name} — AI Workflow Prototype`,
       description: project.description,
       images: ["/og.png"],
     },

@@ -61,7 +61,7 @@ export function BrandSystemCaseStudy({ project }: { project: BrandSystemProject 
             className="inline-flex items-center gap-2 rounded-full px-1 py-2 text-sm text-white/52 outline-none transition hover:text-blue-100 focus-visible:ring-2 focus-visible:ring-blue-400"
           >
             <ArrowLeft size={15} aria-hidden="true" />
-            Return to Digital Growth
+            Return to Brand &amp; Marketing
           </Link>
         </footer>
       </div>

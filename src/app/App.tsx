@@ -89,7 +89,7 @@ const WEB_PROJECTS: Project[] = [
     id: "corporate-lens",
     title: "The Corporate Lens",
     description:
-      "I designed and developed a premium corporate media platform for Pakistan's business landscape, pairing trusted reporting with a refined editorial experience.",
+      "I designed and developed a corporate media website for Pakistan's business landscape, using structured editorial layouts and clear article discovery.",
     category: "web",
     url: "https://thecorporatelens.com",
     tags: ["Next.js", "TypeScript", "Editorial"],
@@ -102,7 +102,7 @@ const WEB_PROJECTS: Project[] = [
     id: "euphoric",
     title: "Euphoric",
     description:
-      "I designed a luxury fragrance storefront for men's, women's, and unisex perfume impressions, with immersive storytelling and refined product discovery.",
+      "I designed a fragrance storefront for men's, women's, and unisex perfume impressions, with product storytelling and clear browsing paths.",
     category: "web",
     url: "https://euphoric.pk",
     tags: ["Next.js", "Tailwind CSS", "Headless Commerce"],
@@ -186,7 +186,7 @@ const WEB_PROJECTS: Project[] = [
     id: "bait-us-salam",
     title: "Bait us Salam",
     description:
-      "I built a premium Hajj and Umrah agency concept that organizes detailed packages into filters, comparisons, and inquiry flows with a respectful visual language.",
+      "I built a Hajj and Umrah agency concept that organizes detailed packages into filters, comparisons, and inquiry flows with a respectful visual language.",
     category: "web",
     url: "https://bait-us-salam.vercel.app",
     tags: ["Next.js", "TypeScript", "Framer Motion"],
@@ -198,7 +198,7 @@ const WEB_PROJECTS: Project[] = [
     id: "safe-safar",
     title: "Safe Safar",
     description:
-      "I built a privacy-first vehicle communication platform for Karachi that uses QR stickers to connect road users with owners without exposing phone numbers.",
+      "I built a vehicle communication project for Karachi, designed around QR stickers that let road users contact owners without publicly displaying phone numbers.",
     category: "web",
     url: "https://car-connect-rosy.vercel.app",
     tags: ["Next.js", "QR Platform", "Privacy"],
@@ -214,11 +214,11 @@ const AI_PROJECTS: Project[] = [
     id: "debate",
     title: "Debate Council",
     description:
-      "I built a multi-agent reasoning council where two debaters develop opposing cases and a separate judge evaluates the arguments without taking a side.",
+      "Portfolio AI prototype: I built a role-based CrewAI workflow where proposer, opponent, and judge stages demonstrate multi-perspective reasoning.",
     category: "ai",
     href: "/work/ai/debate",
-    cta: "Launch system",
-    tags: ["CrewAI", "Reasoning", "Multi-Agent"],
+    cta: "Open prototype",
+    tags: ["CrewAI", "Reasoning", "Portfolio Prototype"],
     hue: "350",
     visual: {
       code: "DC",
@@ -229,11 +229,11 @@ const AI_PROJECTS: Project[] = [
     id: "engineering_team",
     title: "Engineering Team",
     description:
-      "I designed a Claude-powered coding crew that turns a software brief into a complete, reviewed, and runnable project bundle across languages and frameworks.",
+      "Portfolio AI prototype: I explored a staged code-generation workflow that turns a small software brief into architecture, implementation, and review outputs.",
     category: "ai",
     href: "/work/ai/engineering_team",
-    cta: "Launch system",
-    tags: ["CrewAI", "Claude", "Code Generation"],
+    cta: "Open prototype",
+    tags: ["CrewAI", "Claude", "Portfolio Prototype"],
     hue: "42",
     visual: {
       code: "ET",
@@ -244,11 +244,11 @@ const AI_PROJECTS: Project[] = [
     id: "financial_researcher",
     title: "Financial Researcher",
     description:
-      "I built a verification-first financial research crew that gathers current company evidence and turns it into a focused, structured business report.",
+      "Portfolio AI prototype: I built a structured company-research workflow designed to move from company checks and evidence gathering to a readable analysis.",
     category: "ai",
     href: "/work/ai/financial_researcher",
-    cta: "Launch system",
-    tags: ["CrewAI", "Web Research", "Analysis"],
+    cta: "Open prototype",
+    tags: ["CrewAI", "Research Workflow", "Portfolio Prototype"],
     hue: "158",
     visual: {
       code: "FR",
@@ -259,11 +259,11 @@ const AI_PROJECTS: Project[] = [
     id: "stock_picker",
     title: "Stock Picker",
     description:
-      "I created a managed market-intelligence crew that finds trending companies in an industry, compares the candidates, and explains its final selection.",
+      "Portfolio AI prototype: I explored a multi-step market-research workflow designed to surface attention signals, compare companies, and explain a selection.",
     category: "ai",
     href: "/work/ai/stock_picker",
-    cta: "Launch system",
-    tags: ["CrewAI", "Market Intelligence", "Agents"],
+    cta: "Open prototype",
+    tags: ["CrewAI", "Research Workflow", "Portfolio Prototype"],
     hue: "235",
     visual: {
       code: "SP",
@@ -275,7 +275,7 @@ const AI_PROJECTS: Project[] = [
 const SUGGESTED_QUESTIONS = [
   "What kind of work do you do?",
   "Tell me about Patricians.",
-  "What technologies do you specialize in?",
+  "What AI experience do you have?",
   "How can we work together?",
 ];
 
@@ -561,7 +561,7 @@ function Hero({ onAskClick }: { onAskClick: () => void }) {
         <Reveal delay={80}>
           <h1 className="mb-14 flex justify-center select-none">
             <span className="sr-only">
-              Shayan Batoaq — AI Engineer, Full-Stack Developer, and Digital Growth Strategist
+              Shayan Batoaq — AI Engineer, Full-Stack Developer, and Product-Focused Builder
             </span>
             <img
               src="/assets/shayan-batoaq-logo.png"
@@ -594,7 +594,7 @@ function Hero({ onAskClick }: { onAskClick: () => void }) {
             className="max-w-lg mx-auto text-base text-white/35 leading-[1.75] mb-12"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            I&apos;m Shayan Batoaq, a full-stack developer and AI engineer creating intelligent digital experiences inspired by precision, curiosity, and thoughtful design.
+            I&apos;m Shayan Batoaq, an AI engineer and full-stack developer building applied-AI prototypes, agent workflows, and thoughtful web products.
           </p>
         </Reveal>
 
@@ -647,7 +647,7 @@ const aboutTopics = [
   {
     label: "Full Stack Development",
     heading: "Building for the full surface area of the web.",
-    body: "From database architecture to pixel-perfect interfaces, I work across the entire stack. I architect systems that are not just functional, but elegant, scalable, and built to endure. Every layer matters. Every decision compounds.",
+    body: "I work across modern web products, from responsive interfaces and APIs to content, data, deployment, and client handoff. My focus is clear user journeys, careful implementation, and products that are straightforward to use and maintain.",
     gradFrom: "rgba(30,144,255,0.12)",
     gradTo: "rgba(79,123,255,0.06)",
     reverse: false,
@@ -656,31 +656,31 @@ const aboutTopics = [
     imageContain: false,
   },
   {
-    label: "Agentic AI Engineering",
-    heading: "Teaching machines to reason, not just respond.",
-    body: "I design agentic systems where AI does not just answer questions: it orchestrates complex workflows, reasons through ambiguity, and takes meaningful action. This is the frontier I have chosen to work in, and I approach it with deep conviction.",
+    label: "Applied AI Prototyping",
+    heading: "Exploring useful multi-step AI workflows.",
+    body: "During an Agentic AI internship at Integrity Technologies from September to December 2025, I worked with RAG pipelines, conversational agents for internal knowledge-management use cases, LLM API integrations, and prompt experiments. My other AI work is portfolio prototyping, not production-scale client delivery.",
     gradFrom: "rgba(106,90,205,0.12)",
     gradTo: "rgba(138,43,226,0.06)",
     reverse: true,
     image: "/assets/projects/story-ai-custom.webp",
-    imageAlt: "Connected reasoning nodes representing an agentic AI system",
+    imageAlt: "Connected nodes representing a multi-step AI workflow",
     imageContain: false,
   },
   {
-    label: "Digital Growth",
-    heading: "Strategy that compounds over time.",
-    body: "Growth is not about tactics: it is about understanding why people care. I approach digital growth with the same rigor as engineering: data-driven, systematically tested, and always in service of a brand's long-term story rather than vanity metrics.",
+    label: "Digital Marketing & Brand Work",
+    heading: "Clear communication across brands and channels.",
+    body: "My experience includes content planning, social media work, Meta campaigns, brand positioning, creative direction, and audience communication. I value repeatable content systems and close collaboration between strategy, design, and delivery.",
     gradFrom: "rgba(106,10,173,0.12)",
     gradTo: "rgba(138,43,226,0.06)",
     reverse: false,
     image: "/assets/projects/story-growth-custom.webp",
-    imageAlt: "Luminous data streams converging into sustained digital growth",
+    imageAlt: "Abstract data streams representing digital marketing and brand communication",
     imageContain: false,
   },
   {
     label: "Co-founder · Patricians",
-    heading: "Building the company I always wanted to work for.",
-    body: "Patricians is the venture where ambition meets craft. As co-founder, I shape not just its products but its culture: one that values excellence, intellectual honesty, and building things genuinely worth building. I make no compromises on any of those.",
+    heading: "Building products directly with clients.",
+    body: "As a co-founder of Patricians, I contribute across product strategy, design, development, and delivery for client-facing websites and digital products. We are also exploring AI assistants, agent workflows, and AI-native product ideas as a direction for the studio.",
     gradFrom: "rgba(30,144,255,0.08)",
     gradTo: "rgba(106,90,205,0.08)",
     reverse: true,
@@ -721,7 +721,7 @@ function About() {
             className="max-w-2xl text-xl text-white/40 leading-[1.75] mb-28 font-light"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            I am a full stack developer and AI engineer who believes the best software feels inevitable, as though it could not have been built any other way. I bring that conviction to every line of code, every product decision, and every collaboration.
+            I am an early-career AI engineer and full-stack developer with experience spanning client websites, digital marketing, an applied-AI internship, and portfolio prototypes. I learn quickly, work across product and design, and value feedback from stronger engineers and collaborators.
           </p>
         </Reveal>
 
@@ -806,7 +806,7 @@ const CHAPTERS = [
     icon: <Gauge size={20} strokeWidth={1.5} />,
     title: "Precision",
     subtitle: "Motorsport as my mental model.",
-    body: "Motorsport is one of my clearest mental models for precision. Across F1, WEC, and IMSA, success comes from obsessive systems thinking: every component optimized, every process refined, every millisecond accountable. That is how I approach engineering, with the understanding that excellence is never accidental. It is the accumulation of thousands of small, correct decisions made deliberately and under pressure.",
+    body: "Motorsport is one of my clearest mental models for precision. Across F1, WEC, and IMSA, complex results depend on many connected decisions, careful preparation, and constant refinement. I bring that same attention to interfaces, implementation details, and how each part of a product supports the whole.",
     gradFrom: "rgba(30,144,255,0.08)",
     gradTo: "rgba(79,123,255,0.04)",
     borderColor: "rgba(30,144,255,0.14)",
@@ -816,7 +816,7 @@ const CHAPTERS = [
     icon: <Dumbbell size={20} strokeWidth={1.5} />,
     title: "Discipline",
     subtitle: "MMA taught me patience.",
-    body: "There are no shortcuts in the cage. I earn every position, I lose it, and I earn it again. MMA rewired how I understand consistency: talent without discipline is noise, and the most sophisticated techniques are only available after doing the fundamentals ten thousand times. That mindset walks into every project I take on.",
+    body: "MMA has taught me patience with fundamentals and the value of showing up consistently. Progress comes from repeating the basics, noticing mistakes, and returning with better control. I try to bring that discipline to learning unfamiliar tools and working through difficult product problems.",
     gradFrom: "rgba(106,90,205,0.08)",
     gradTo: "rgba(138,43,226,0.04)",
     borderColor: "rgba(106,90,205,0.14)",
@@ -825,8 +825,8 @@ const CHAPTERS = [
     number: "III",
     icon: <BrainCircuit size={20} strokeWidth={1.5} />,
     title: "Curiosity",
-    subtitle: "AI is the most interesting problem of our time.",
-    body: "When foundation models arrived, I did not wait to see where the dust settled: I went in. AI reshapes what is possible in software and, more importantly, which questions are worth asking. Staying curious is not a personality trait for me; it is a professional obligation when the landscape changes this fast.",
+    subtitle: "Applied AI is where I want to grow.",
+    body: "I have pursued applied AI through self-directed prototypes and an Agentic AI internship. The tools and patterns change quickly, so I keep testing ideas, learning from stronger engineers, and improving how I connect models to useful interfaces and workflows.",
     gradFrom: "rgba(106,10,173,0.08)",
     gradTo: "rgba(138,43,226,0.04)",
     borderColor: "rgba(106,10,173,0.14)",
@@ -836,7 +836,7 @@ const CHAPTERS = [
     icon: <PenTool size={20} strokeWidth={1.5} />,
     title: "Creation",
     subtitle: "Software is just the medium.",
-    body: "Code is the material, not the point. The point is the person who uses what I build: what they feel when an interface responds exactly as they hoped, when a product makes life a little clearer, faster, and better. I do not build software just to write functions. I build experiences people genuinely enjoy returning to.",
+    body: "Code is the material, not the point. I try to build interfaces that make the next action clear and the overall experience considered. Whether the work is a website or an AI prototype, usefulness is the goal and implementation is how I support it.",
     gradFrom: "rgba(138,43,226,0.08)",
     gradTo: "rgba(106,10,173,0.04)",
     borderColor: "rgba(138,43,226,0.14)",
@@ -962,7 +962,7 @@ function AgentSystemPreview({ project }: { project: Project }) {
           className="text-[9px] uppercase tracking-[0.24em]"
           style={{ color: `hsla(${project.hue}, 82%, 72%, .72)` }}
         >
-          Agentic system
+          AI workflow prototype
         </span>
         <span className="flex items-center gap-1.5 text-[9px] uppercase tracking-[0.18em] text-white/24">
           <span
@@ -972,7 +972,7 @@ function AgentSystemPreview({ project }: { project: Project }) {
               background: "currentColor",
             }}
           />
-          Online
+          Available
         </span>
       </div>
 
@@ -1175,8 +1175,8 @@ function Work() {
 
   const filters: { key: WorkFilter; label: string }[] = [
     { key: "web", label: "Websites" },
-    { key: "ai", label: "AI Systems" },
-    { key: "brand", label: "Digital Growth" },
+    { key: "ai", label: "AI Prototypes" },
+    { key: "brand", label: "Brand & Marketing" },
   ];
 
   const filteredProjects =
@@ -1395,7 +1395,7 @@ function Patricians() {
                   className="text-white/42 text-lg leading-[1.75] mb-10 font-light"
                   style={{ fontFamily: "var(--font-body)" }}
                 >
-                  I co-founded Patricians, a design and technology studio built on the belief that quality is not a feature: it is a commitment. I shape not just its products, but the standards by which they are made. Every client. Every deliverable. No compromises.
+                  I co-founded Patricians, where I work directly across product strategy, design, development, and delivery for client-facing websites and digital products. The studio also explores AI assistants, agent workflows, and AI-native concepts as a future direction; I do not present those experiments as mature client deployments.
                 </p>
                 <a
                   href="https://patricians.pk"
@@ -1776,7 +1776,7 @@ function AskModal({ onClose }: { onClose: () => void }) {
             className="text-white/70 text-base font-semibold"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Powered by my perspective
+            Based on approved portfolio information
           </h2>
         </div>
         <button
@@ -1998,7 +1998,7 @@ function AskModal({ onClose }: { onClose: () => void }) {
             className="text-[10px] text-white/14 text-center mt-3"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            Responses reflect my perspective. For direct enquiries, reach out by email.
+            Responses use approved portfolio information. For direct enquiries, reach out by email.
           </p>
         </div>
       </div>

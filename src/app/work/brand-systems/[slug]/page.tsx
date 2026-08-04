@@ -24,26 +24,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const socialImage = project.gallery.find((asset) => asset.available)?.src ?? "/og.png";
 
   return {
-    title: `${project.name} — Digital Growth`,
+    title: `${project.name} — Brand & Marketing`,
     description: project.summary,
     alternates: {
       canonical: path,
     },
     openGraph: {
-      title: `${project.name} Digital Growth Case Study | Shayan Batoaq`,
+      title: `${project.name} Brand & Marketing Case Study | Shayan Batoaq`,
       description: project.summary,
       type: "article",
       url: absoluteUrl(path),
       images: [
         {
           url: socialImage,
-          alt: `${project.name} digital growth work by Shayan Batoaq`,
+          alt: `${project.name} brand and marketing work by Shayan Batoaq`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.name} — Digital Growth`,
+      title: `${project.name} — Brand & Marketing`,
       description: project.summary,
       images: [socialImage],
     },

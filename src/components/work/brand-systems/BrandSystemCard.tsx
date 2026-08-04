@@ -43,7 +43,7 @@ export function BrandSystemCard({ project, index }: BrandSystemCardProps) {
       <Link
         href={`/work/brand-systems/${project.slug}`}
         className="relative z-10 block h-full rounded-[1.75rem] p-4 outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-[#07070f] sm:p-5"
-        aria-label={`Explore the ${project.name} digital growth case study`}
+        aria-label={`Explore the ${project.name} brand and marketing case study`}
       >
         <div className="flex items-start justify-between gap-4 px-1 pb-4 pt-1">
           <div className="flex min-w-0 items-center gap-3.5">
@@ -115,7 +115,7 @@ export function BrandSystemCard({ project, index }: BrandSystemCardProps) {
           </div>
 
           <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-white/80 transition-colors group-hover:text-blue-200">
-            Explore System
+            Explore Case Study
             <ArrowUpRight
               size={14}
               aria-hidden="true"

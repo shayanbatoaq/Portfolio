@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Shayan Batoaq Portfolio",
     short_name: "Shayan Batoaq",
     description:
-      "AI systems, full-stack web development, and digital growth work by Shayan Batoaq.",
+      "Applied-AI prototypes, full-stack web development, and client-facing digital work by Shayan Batoaq.",
     start_url: "/",
     display: "standalone",
     background_color: "#07070f",

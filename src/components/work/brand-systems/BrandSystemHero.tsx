@@ -17,7 +17,7 @@ export function BrandSystemHero({ project }: { project: BrandSystemProject }) {
             className="inline-flex items-center gap-2 rounded-full px-1 py-2 text-sm text-white/55 outline-none transition hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400"
           >
             <ArrowLeft size={15} aria-hidden="true" />
-            Back to Digital Growth
+            Back to Brand &amp; Marketing
           </Link>
         </nav>
 
