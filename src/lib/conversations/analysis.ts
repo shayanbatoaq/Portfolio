@@ -80,6 +80,31 @@ const responseSchema = {
   },
 } as const;
 
+export function fallbackConversationAnalysis(
+  conversation: ConversationMessage[],
+): ConversationAnalysis {
+  const latestVisitorMessage = [...conversation]
+    .reverse()
+    .find((message) => message.role === "user")?.content;
+  const summary = latestVisitorMessage
+    ? `AI analysis is pending. Latest visitor message: ${sanitizeStoredText(latestVisitorMessage)}`
+    : "AI analysis is pending. The conversation was captured for manual review.";
+
+  return {
+    visitorIntent: "General Visitor",
+    opportunityTypes: ["None"],
+    opportunityScore: 0,
+    qualifiedOpportunity: false,
+    contactRecommended: false,
+    interestAreas: [],
+    summary,
+    outcome: "Informational",
+    knowledgeGaps: [],
+    improvements: ["Review this conversation manually while AI analysis is unavailable."],
+    tags: ["Analysis Pending"],
+  };
+}
+
 export async function analyzeConversation(
   conversation: ConversationMessage[],
 ): Promise<ConversationAnalysis> {
