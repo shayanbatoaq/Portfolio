@@ -339,8 +339,24 @@ export default function CrewLab({ project, projects }: Props) {
         return;
       }
 
-      setActiveJob(data.job);
-      window.localStorage.setItem(ACTIVE_RUN_KEY, data.job.id);
+      if (data.job.status === "running") {
+        setActiveJob(data.job);
+        window.localStorage.setItem(ACTIVE_RUN_KEY, data.job.id);
+        return;
+      }
+
+      setActiveJob(null);
+      window.localStorage.removeItem(ACTIVE_RUN_KEY);
+      const updatedHistory = saveFinishedJob(data.job, project.name);
+      setHistory(updatedHistory);
+      if (data.job.result) {
+        setRun(data.job.result);
+        setActiveOutput(
+          !data.job.result.result && data.job.result.files?.[0]
+            ? data.job.result.files[0].path
+            : "result",
+        );
+      }
     } catch (error) {
       setRun({
         ok: false,
