@@ -82,10 +82,10 @@ export async function POST(request: NextRequest, { params }: Params) {
     );
   }
 
-  const job = startCrewJob(projectId, payload, identity);
+  const job = await startCrewJob(projectId, payload, identity);
   return NextResponse.json(
     { job },
-    { status: 202, headers: { "Cache-Control": "no-store" } },
+    { headers: { "Cache-Control": "no-store" } },
   );
 }
 

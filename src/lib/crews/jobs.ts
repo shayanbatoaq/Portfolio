@@ -26,7 +26,6 @@ type CrewJobStore = {
 };
 
 declare global {
-  // eslint-disable-next-line no-var
   var __shayanCrewJobStore: CrewJobStore | undefined;
 }
 
@@ -119,7 +118,7 @@ export function getCrewJob(jobId: string, identity: string) {
   return publicJob(job);
 }
 
-export function startCrewJob(
+export async function startCrewJob(
   projectId: string,
   payload: Record<string, string>,
   identity: string,
@@ -139,32 +138,30 @@ export function startCrewJob(
   store.jobs.set(job.id, job);
   store.activeByIdentity.set(identity, job.id);
 
-  void runCrew(projectId, payload)
-    .then((result) => {
-      job.result = result;
-      job.status = result.ok ? "completed" : "failed";
-      job.updatedAt = new Date().toISOString();
-    })
-    .catch((error: unknown) => {
-      job.result = {
-        ok: false,
-        projectId,
-        durationMs: Date.now() - Date.parse(job.startedAt),
-        stdout: "",
-        stderr: "",
-        error:
-          error instanceof Error
-            ? error.message
-            : "The crew stopped unexpectedly.",
-      };
-      job.status = "failed";
-      job.updatedAt = new Date().toISOString();
-    })
-    .finally(() => {
-      if (store.activeByIdentity.get(identity) === job.id) {
-        store.activeByIdentity.delete(identity);
-      }
-    });
+  try {
+    const result = await runCrew(projectId, payload);
+    job.result = result;
+    job.status = result.ok ? "completed" : "failed";
+    job.updatedAt = new Date().toISOString();
+  } catch (error: unknown) {
+    job.result = {
+      ok: false,
+      projectId,
+      durationMs: Date.now() - Date.parse(job.startedAt),
+      stdout: "",
+      stderr: "",
+      error:
+        error instanceof Error
+          ? error.message
+          : "The crew stopped unexpectedly.",
+    };
+    job.status = "failed";
+    job.updatedAt = new Date().toISOString();
+  } finally {
+    if (store.activeByIdentity.get(identity) === job.id) {
+      store.activeByIdentity.delete(identity);
+    }
+  }
 
   return publicJob(job);
 }
