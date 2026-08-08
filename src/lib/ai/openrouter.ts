@@ -3,6 +3,9 @@ import "server-only";
 import { chatConfig } from "@/lib/ai/chat-config";
 import type { ChatMessage } from "@/lib/ai/chat-validation";
 import { SHAYAN_SYSTEM_PROMPT } from "@/lib/ai/shayan-system-prompt";
+import { sanitizeStoredText } from "@/lib/conversations/sanitize";
+import { normalizeOpenRouterUsage } from "@/lib/conversations/usage";
+import type { TokenUsage } from "@/types/conversations";
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 
@@ -20,6 +23,8 @@ export class ChatServiceError extends Error {
 }
 
 interface OpenRouterResponse {
+  model?: unknown;
+  usage?: unknown;
   choices?: Array<{
     message?: {
       content?: unknown;
@@ -27,9 +32,15 @@ interface OpenRouterResponse {
   }>;
 }
 
+export interface ChatCompletionResult {
+  message: string;
+  model: string;
+  usage: TokenUsage;
+}
+
 export async function createChatCompletion(
   conversation: ChatMessage[]
-): Promise<string> {
+): Promise<ChatCompletionResult> {
   const apiKey = process.env.OPENROUTER_API_KEY?.trim();
   if (!apiKey) throw new ChatServiceError("configuration");
 
@@ -55,6 +66,7 @@ export async function createChatCompletion(
         temperature: chatConfig.temperature,
         top_p: chatConfig.topP,
         max_tokens: chatConfig.maxTokens,
+        usage: { include: true },
       }),
       signal: controller.signal,
     });
@@ -82,8 +94,12 @@ export async function createChatCompletion(
     throw new ChatServiceError("invalid_response");
   }
 
-  const message = content.replace(/\u0000/g, "").trim();
+  const message = sanitizeStoredText(content);
   if (!message) throw new ChatServiceError("invalid_response");
 
-  return message.slice(0, 12_000);
+  return {
+    message: message.slice(0, 12_000),
+    model: typeof payload.model === "string" ? payload.model : chatConfig.model,
+    usage: normalizeOpenRouterUsage(payload.usage),
+  };
 }

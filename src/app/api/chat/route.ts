@@ -11,6 +11,7 @@ import {
   ChatServiceError,
   createChatCompletion,
 } from "@/lib/ai/openrouter";
+import { signConversationEvent } from "@/lib/conversations/auth";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -57,8 +58,32 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const message = await createChatCompletion(conversation);
-    return NextResponse.json({ message });
+    const completion = await createChatCompletion(conversation.promptMessages);
+    const completedAt = new Date().toISOString();
+    const event = {
+      sessionId: conversation.sessionId,
+      exchangeId: conversation.exchangeId,
+      startedAt: conversation.startedAt,
+      completedAt,
+      model: completion.model,
+      usage: completion.usage,
+      conversation: [
+        ...conversation.conversation,
+        { role: "assistant" as const, content: completion.message },
+      ],
+    };
+    return NextResponse.json({
+      message: completion.message,
+      logging: {
+        sessionId: event.sessionId,
+        exchangeId: event.exchangeId,
+        startedAt: event.startedAt,
+        completedAt: event.completedAt,
+        model: event.model,
+        usage: event.usage,
+        token: signConversationEvent(event),
+      },
+    });
   } catch (error) {
     if (error instanceof ChatServiceError) {
       if (error.kind === "rate_limited") {

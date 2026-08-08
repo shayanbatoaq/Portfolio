@@ -18,4 +18,11 @@
   `OPENROUTER_MODEL` defaults to `openai/gpt-5.4-mini`. Set
   `NEXT_PUBLIC_SITE_URL` to the deployed site URL and keep
   `NEXT_PUBLIC_SITE_NAME` as the portfolio name used for OpenRouter requests.
+
+  To store completed chat exchanges in Notion, set `NOTION_TOKEN` to the
+  connector secret and `NOTION_PORTFOLIO_DATABASE_ID` to the ID from the
+  **Portfolio AI Conversations database URL**. Do not use the ID of the page
+  that contains the database. Share that database (or its parent page) with the
+  connector, then restart the development server after changing environment
+  variables.
 # Portfolio

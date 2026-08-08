@@ -32,6 +32,13 @@ import { contact } from "@/data/shayan/contact";
 import { emitSceneReaction } from "@/lib/three/sceneEvents";
 import { BrandSystemsSection } from "@/components/work/brand-systems/BrandSystemsSection";
 import { PortfolioNav } from "@/components/navigation/PortfolioNav";
+import {
+  getPersistedConversationMessages,
+  initializeConversationLogging,
+  isChatLoggingMetadata,
+  prepareConversationMessage,
+  recordSuccessfulConversation,
+} from "@/lib/conversations/session";
 
 const BackgroundScene = dynamic(
   () => import("@/components/three/BackgroundScene"),
@@ -1653,7 +1660,9 @@ function Contact() {
 // ── Ask Shayan modal ──────────────────────────────────────────────────────────
 
 function AskModal({ onClose }: { onClose: () => void }) {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(() =>
+    getPersistedConversationMessages(),
+  );
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
@@ -1675,14 +1684,14 @@ function AskModal({ onClose }: { onClose: () => void }) {
     return () => requestRef.current?.abort();
   }, []);
 
+  useEffect(() => initializeConversationLogging(), []);
+
   const sendMessage = useCallback(
     async (text: string) => {
       if (!text.trim() || typing) return;
       emitSceneReaction("message-submit", 1);
-      const nextMessages = [
-        ...messages,
-        { role: "user" as const, text: text.trim() },
-      ];
+      const prepared = prepareConversationMessage(text);
+      const nextMessages = prepared.messages;
 
       setMessages(nextMessages);
       setInput("");
@@ -1697,10 +1706,10 @@ function AskModal({ onClose }: { onClose: () => void }) {
           headers: { "Content-Type": "application/json" },
           signal: controller.signal,
           body: JSON.stringify({
-            messages: nextMessages.map((message) => ({
-              role: message.role === "ai" ? "assistant" : "user",
-              content: message.text,
-            })),
+            messages: prepared.requestMessages,
+            sessionId: prepared.sessionId,
+            exchangeId: prepared.exchangeId,
+            startedAt: prepared.startedAt,
           }),
         });
         const payload: unknown = await response.json().catch(() => null);
@@ -1710,6 +1719,13 @@ function AskModal({ onClose }: { onClose: () => void }) {
           "message" in payload &&
           typeof payload.message === "string"
             ? payload.message.trim()
+            : null;
+        const logging =
+          payload &&
+          typeof payload === "object" &&
+          "logging" in payload &&
+          isChatLoggingMetadata(payload.logging)
+            ? payload.logging
             : null;
 
         if (!response.ok) {
@@ -1726,7 +1742,7 @@ function AskModal({ onClose }: { onClose: () => void }) {
           return;
         }
 
-        if (!reply) {
+        if (!reply || !logging) {
           throw new Error("Chat request failed");
         }
 
@@ -1734,6 +1750,7 @@ function AskModal({ onClose }: { onClose: () => void }) {
           ...current,
           { role: "ai", text: reply },
         ]);
+        recordSuccessfulConversation(prepared, reply, logging);
         if (reply.length > 280) {
           emitSceneReaction("chat-reading", 1);
         }
@@ -1749,7 +1766,7 @@ function AskModal({ onClose }: { onClose: () => void }) {
         setTyping(false);
       }
     },
-    [messages, typing]
+    [typing],
   );
 
   return (
