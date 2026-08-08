@@ -11,7 +11,7 @@ export const chatConfig = {
   topP: 0.9,
   maxTokens: 600,
   requestTimeoutMs: 15_000,
-  maxRequestBodyBytes: 32_000,
+  maxRequestBodyBytes: 300_000,
   maxMessageCharacters: 2_000,
   maxHistoryMessages: 12,
   rateLimitWindowMs: 60_000,
