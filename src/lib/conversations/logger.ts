@@ -1,6 +1,9 @@
 import "server-only";
 
-import { analyzeConversation } from "@/lib/conversations/analysis";
+import {
+  analyzeConversation,
+  fallbackConversationAnalysis,
+} from "@/lib/conversations/analysis";
 import { ensureUsageCost } from "@/lib/conversations/cost";
 import {
   appendConversationBlocks,
@@ -21,6 +24,7 @@ import {
   usageText,
 } from "@/lib/conversations/transcript";
 import type {
+  ConversationAnalysis,
   ConversationLogEvent,
   UsageTotals,
 } from "@/types/conversations";
@@ -142,7 +146,15 @@ async function synchronizeConversation(eventInput: ConversationLogEvent): Promis
     ...eventInput,
     usage: await ensureUsageCost(eventInput.usage, eventInput.model),
   };
-  const analysis = await analyzeConversation(event.conversation);
+  let analysis: ConversationAnalysis;
+  try {
+    analysis = await analyzeConversation(event.conversation);
+  } catch (error) {
+    console.warn("Conversation analysis unavailable; saving with fallback metadata", {
+      reason: error instanceof Error ? error.message : "Unknown error",
+    });
+    analysis = fallbackConversationAnalysis(event.conversation);
+  }
   let snapshot = await findConversationPage(event.sessionId);
 
   if (!snapshot) {
