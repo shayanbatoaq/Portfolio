@@ -1783,18 +1783,18 @@ function AskModal({ onClose }: { onClose: () => void }) {
         style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
       >
         <div>
-          <p
-            className="text-[9px] tracking-[0.35em] text-white/22 uppercase mb-0.5"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            Ask Me
-          </p>
           <h2
-            className="text-white/70 text-base font-semibold"
+            className="text-2xl sm:text-[28px] font-semibold leading-none text-white"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Based on approved portfolio information
+            Ask Me
           </h2>
+          <p
+            className="mt-2 text-[10px] sm:text-[11px] tracking-[0.22em] text-white/38 uppercase"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            Chat with Shayan&apos;s AI counterpart
+          </p>
         </div>
         <button
           onClick={onClose}
