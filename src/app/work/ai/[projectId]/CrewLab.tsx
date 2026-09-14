@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 
 import type { CrewProject } from "@/lib/crews/projects";
+import { WorkflowStages } from "@/components/work/WorkflowStages";
 import { PortfolioNav } from "@/components/navigation/PortfolioNav";
 
 type CrewRun = {
@@ -555,48 +556,12 @@ export default function CrewLab({ project, projects }: Props) {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-white/[0.07] bg-white/[0.025] p-5 backdrop-blur-xl sm:p-6">
-            <div className="mb-5 flex items-center justify-between">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-white/28">
-                Workflow stages
-              </span>
-              <Sparkles size={15} style={{ color: project.accent }} />
-            </div>
-            <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-start gap-2">
-              {project.stages.map((stage, index) => (
-                <div key={stage.label} className="contents">
-                  <div className="min-w-0 text-center">
-                    <div
-                      className={`mx-auto grid size-11 place-items-center rounded-full border ${
-                        isCurrentProjectRunning ? "animate-pulse" : ""
-                      }`}
-                      style={{
-                        borderColor: `rgba(${project.accentRgb}, .28)`,
-                        background: `rgba(${project.accentRgb}, .08)`,
-                        color: project.accent,
-                      }}
-                    >
-                      <span className="font-mono text-xs">0{index + 1}</span>
-                    </div>
-                    <div className="mt-3 truncate text-xs font-semibold text-white/72">
-                      {stage.label}
-                    </div>
-                    <div className="mt-1 hidden text-[10px] leading-4 text-white/25 sm:block">
-                      {stage.detail}
-                    </div>
-                  </div>
-                  {index < project.stages.length - 1 && (
-                    <div
-                      className="mt-[1.35rem] h-px w-5 sm:w-9"
-                      style={{
-                        background: `linear-gradient(90deg, rgba(${project.accentRgb}, .55), rgba(${project.accentRgb}, .12))`,
-                      }}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+          <WorkflowStages
+            stages={project.stages}
+            accent={project.accent}
+            accentRgb={project.accentRgb}
+            running={isCurrentProjectRunning}
+          />
         </section>
 
         <section className="grid gap-5 lg:grid-cols-[minmax(320px,410px)_minmax(0,1fr)]">

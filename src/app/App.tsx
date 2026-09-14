@@ -29,6 +29,7 @@ import {
   Download,
 } from "lucide-react";
 import { contact } from "@/data/shayan/contact";
+import { lapsignal } from "@/data/lapsignal";
 import { emitSceneReaction } from "@/lib/three/sceneEvents";
 import { BrandSystemsSection } from "@/components/work/brand-systems/BrandSystemsSection";
 import { PortfolioNav } from "@/components/navigation/PortfolioNav";
@@ -83,6 +84,7 @@ interface Project {
   imageAlt?: string;
   imageFit?: "cover" | "contain";
   imageBackground?: string;
+  imageFilter?: string;
   visual?: {
     code: string;
     stages: string[];
@@ -217,6 +219,7 @@ const WEB_PROJECTS: Project[] = [
 ];
 
 const AI_PROJECTS: Project[] = [
+  lapsignal,
   {
     id: "debate",
     title: "Debate Council",
@@ -1063,7 +1066,7 @@ function ProjectCard({ project }: { project: Project }) {
               containsLogo ? "object-contain p-8" : "object-cover opacity-80"
             }`}
             style={{
-              filter: containsLogo ? "none" : "saturate(0.75) contrast(1.08)",
+              filter: project.imageFilter ?? (containsLogo ? "none" : "saturate(0.75) contrast(1.08)"),
             }}
           />
         ) : null}
