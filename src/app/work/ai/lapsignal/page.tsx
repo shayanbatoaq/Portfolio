@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { PortfolioNav } from "@/components/navigation/PortfolioNav";
+import { LapSignalArchitecture } from "@/components/work/LapSignalArchitecture";
 import { WorkflowStages } from "@/components/work/WorkflowStages";
 import { lapsignal } from "@/data/lapsignal";
 import { absoluteUrl } from "@/lib/seo";
@@ -55,7 +56,7 @@ export default function LapSignalPage() {
             </span>
             {lapsignal.categoryLabel}
           </div>
-          <Link href="/?work=ai#work" className="inline-flex items-center gap-2 rounded-full border border-white/[0.09] bg-white/[0.035] px-4 py-2 text-xs text-white/55 transition hover:border-white/20 hover:text-white">
+          <Link href="/?work=featured#work" className="inline-flex items-center gap-2 rounded-full border border-white/[0.09] bg-white/[0.035] px-4 py-2 text-xs text-white/55 transition hover:border-white/20 hover:text-white">
             <ArrowLeft size={13} /> Back to work
           </Link>
         </div>
@@ -72,11 +73,13 @@ export default function LapSignalPage() {
               <span className="text-xs text-white/25">{lapsignal.role}</span>
             </div>
             <a href={lapsignal.demoUrl} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/[0.09] bg-white/[0.035] px-4 py-2 text-xs text-white/55 transition hover:border-white/20 hover:text-white">
-              View Web Demo <ArrowUpRight size={13} />
+              View Live Showcase <ArrowUpRight size={13} />
             </a>
           </div>
           <WorkflowStages stages={lapsignal.stages} accent={lapsignal.accent} accentRgb={lapsignal.accentRgb} />
         </section>
+
+        <div className="mb-10"><LapSignalArchitecture /></div>
 
         <section className="grid gap-5 lg:grid-cols-[minmax(320px,410px)_minmax(0,1fr)]" aria-label="Project details">
           <aside className="rounded-3xl border border-white/[0.07] bg-[#0b0b18]/80 p-5 shadow-2xl shadow-black/25 backdrop-blur-xl sm:p-6">
@@ -135,7 +138,7 @@ export default function LapSignalPage() {
           </div>
         </section>
         <footer className="border-t border-white/[0.08] py-12 sm:py-16">
-          <Link href="/?work=ai#work" className="inline-flex items-center gap-2 rounded-full px-1 py-2 text-sm text-white/52 outline-none transition hover:text-blue-100 focus-visible:ring-2 focus-visible:ring-blue-400">
+          <Link href="/?work=featured#work" className="inline-flex items-center gap-2 rounded-full px-1 py-2 text-sm text-white/52 outline-none transition hover:text-blue-100 focus-visible:ring-2 focus-visible:ring-blue-400">
             <ArrowLeft size={15} aria-hidden="true" /> Back to work
           </Link>
         </footer>

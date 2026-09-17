@@ -4,7 +4,7 @@ import nextVitals from "eslint-config-next/core-web-vitals";
 export default defineConfig([
   ...nextVitals,
   {
-    files: ["src/app/App.tsx", "src/app/components/figma/**/*.tsx"],
+    files: ["src/components/home/**/*.tsx", "src/app/components/figma/**/*.tsx"],
     rules: {
       "@next/next/no-img-element": "off",
       "react/no-unescaped-entities": "off",

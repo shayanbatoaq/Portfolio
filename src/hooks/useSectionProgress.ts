@@ -18,7 +18,7 @@ export interface SectionProgressSnapshot {
 
 const INITIAL_SNAPSHOT: SectionProgressSnapshot = {
   current: "home",
-  next: "about",
+  next: "work",
   index: 0,
   progress: 0,
   velocity: 0,

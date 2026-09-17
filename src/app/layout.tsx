@@ -24,12 +24,10 @@ export const metadata: Metadata = {
   },
   keywords: [
     "Shayan Batoaq",
-    "AI engineer Pakistan",
-    "full-stack developer Pakistan",
-    "applied AI developer",
-    "CrewAI portfolio projects",
-    "Next.js developer",
-    "product-focused developer",
+    "Full-stack product engineering",
+    "Applied AI",
+    "LapSignal",
+    "Next.js",
   ],
   icons: {
     icon: "/icon.svg",
@@ -45,10 +43,10 @@ export const metadata: Metadata = {
     locale: "en_PK",
     images: [
       {
-        url: "/og.png",
-        width: 1728,
-        height: 910,
-        alt: "Shayan Batoaq — AI Engineer and Full-Stack Developer",
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Shayan Batoaq — Full-Stack & AI Product Engineer",
       },
     ],
   },
@@ -56,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/og.png"],
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
@@ -77,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full" data-scroll-behavior="smooth">
       <body className="min-h-full">{children}</body>
     </html>
   );

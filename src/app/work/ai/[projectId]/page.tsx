@@ -32,10 +32,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       type: "website",
       images: [
         {
-          url: "/og.png",
-          width: 1728,
-          height: 910,
-          alt: "Shayan Batoaq — AI Engineer and Full-Stack Developer",
+          url: "/opengraph-image",
+          width: 1200,
+          height: 630,
+          alt: "Shayan Batoaq — Full-Stack & AI Product Engineer",
         },
       ],
     },
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       card: "summary_large_image",
       title: `${project.name} — AI Workflow Prototype`,
       description: project.description,
-      images: ["/og.png"],
+      images: ["/opengraph-image"],
     },
   };
 }

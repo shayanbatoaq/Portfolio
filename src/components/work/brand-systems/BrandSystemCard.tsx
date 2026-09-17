@@ -13,7 +13,8 @@ type BrandSystemCardProps = {
 };
 
 export function BrandSystemCard({ project, index }: BrandSystemCardProps) {
-  const previewAssets = project.gallery.slice(0, 4);
+  // The collage has three visible slots; the full gallery remains in the case study.
+  const previewAssets = project.gallery.slice(0, 3);
 
   const moveLight = (event: PointerEvent<HTMLElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();

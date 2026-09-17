@@ -1,9 +1,9 @@
 export const PAGE_SECTION_IDS = [
   "home",
-  "about",
-  "philosophy",
   "work",
+  "about",
   "patricians",
+  "philosophy",
   "contact",
 ] as const;
 

@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!project) return {};
 
   const path = `/work/brand-systems/${project.slug}`;
-  const socialImage = project.gallery.find((asset) => asset.available)?.src ?? "/og.png";
+  const socialImage = project.gallery.find((asset) => asset.available)?.src ?? "/opengraph-image";
 
   return {
     title: `${project.name} — Brand & Marketing`,

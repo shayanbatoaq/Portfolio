@@ -1,6 +1,6 @@
 import App from "./App";
 import { contact } from "@/data/shayan/contact";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/seo";
 
 const structuredData = [
   {
@@ -19,7 +19,7 @@ const structuredData = [
     "@type": "ProfilePage",
     "@id": `${SITE_URL}/#profile-page`,
     url: SITE_URL,
-    name: "Shayan Batoaq — AI Engineer & Full-Stack Developer",
+    name: SITE_TITLE,
     description: SITE_DESCRIPTION,
     mainEntity: { "@id": `${SITE_URL}/#person` },
   },
@@ -29,14 +29,16 @@ const structuredData = [
     "@id": `${SITE_URL}/#person`,
     name: SITE_NAME,
     url: SITE_URL,
-    jobTitle: "AI Engineer and Full-Stack Developer",
+    jobTitle: "Full-Stack & AI Product Engineer",
     description: SITE_DESCRIPTION,
     email: `mailto:${contact.email}`,
     sameAs: [contact.linkedIn, contact.instagram],
     knowsAbout: [
       "Applied AI prototypes",
       "AI workflow prototyping",
-      "CrewAI",
+      "Real-time telemetry",
+      "Python",
+      "FastAPI",
       "Full-stack web development",
       "Next.js",
       "TypeScript",

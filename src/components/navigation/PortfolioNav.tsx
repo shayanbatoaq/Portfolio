@@ -1,20 +1,22 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/#home", label: "Home" },
-  { href: "/#about", label: "About" },
   { href: "/#work", label: "Work" },
+  { href: "/#about", label: "About" },
   { href: "/#patricians", label: "Patricians" },
   { href: "/#resume", label: "Resume" },
   { href: "/#contact", label: "Contact" },
 ];
 
 export function PortfolioNav() {
+  const pathname = usePathname();
+  const sectionHref = (href: string) => pathname === "/" ? href.slice(1) : href;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -45,8 +47,8 @@ export function PortfolioNav() {
         }}
       >
         <div className="flex items-center gap-8">
-          <Link
-            href="/#home"
+          <a
+            href={sectionHref("/#home")}
             className="block transition-opacity duration-200 hover:opacity-90"
             aria-label="Shayan Batoaq home"
           >
@@ -59,17 +61,17 @@ export function PortfolioNav() {
               priority
               draggable={false}
             />
-          </Link>
+          </a>
 
           <div className="hidden items-center gap-6 md:flex">
             {NAV_LINKS.map((link) => (
-              <Link
+              <a
                 key={link.href}
-                href={link.href}
+                href={sectionHref(link.href)}
                 className="text-sm text-white/40 transition-colors duration-300 hover:text-white/85"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </div>
 
@@ -100,14 +102,14 @@ export function PortfolioNav() {
             style={{ background: "rgba(7,7,18,0.96)", backdropFilter: "blur(20px)" }}
           >
             {NAV_LINKS.map((link) => (
-              <Link
+              <a
                 key={link.href}
-                href={link.href}
+                href={sectionHref(link.href)}
                 onClick={() => setMobileOpen(false)}
                 className="text-sm text-white/50 transition-colors hover:text-white/90"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </div>
         )}

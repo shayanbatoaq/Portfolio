@@ -2,12 +2,12 @@ export const lapsignal = {
   id: "lapsignal",
   title: "LapSignal",
   category: "ai" as const,
-  categoryLabel: "AI Systems",
+  categoryLabel: "Flagship Engineering",
   type: "Sim Racing Telemetry & Coaching System",
   status: "Alpha Prototype",
   role: "Full-Stack & AI Engineering",
   description:
-    "A local-first digital race engineer for sim racers, combining live telemetry, deterministic analysis, and evidence-backed coaching.",
+    "A sim-racing telemetry and coaching platform that processes F1 2021 driving data into actionable analysis, combining deterministic analytics with optional, evidence-bounded AI coaching.",
   href: "/work/ai/lapsignal",
   demoUrl: "https://lapsignal.vercel.app/",
   cta: "View project",
@@ -31,6 +31,23 @@ export const lapsignal = {
     { label: "Capture", detail: "Windows UDP collector · normalized telemetry · local storage" },
     { label: "Measure", detail: "Deterministic analytics · evidence-backed findings" },
     { label: "Explain", detail: "Rule-based or optional AI coaching · Next.js interface" },
+  ],
+  // Derived from the existing case study; collector language, hardware,
+  // telemetry rates and test coverage are not verified by this repository.
+  architecture: [
+    { label: "F1 2021 → UDP", detail: "Live driving telemetry or recorded replay" },
+    { label: "Windows collector", detail: "Normalize telemetry into a game-independent contract" },
+    { label: "Python / FastAPI", detail: "Zod and Pydantic validate data at the boundaries" },
+    { label: "Deterministic analytics", detail: "Session and lap metrics, comparison and verified findings" },
+    { label: "Next.js interface", detail: "Bounded WebSocket updates and circuit visualization" },
+    { label: "Optional AI coaching", detail: "Explain verified findings; retain rule-based coaching" },
+  ],
+  aiBoundary: "The optional AI layer receives compact verified metrics, findings and evidence IDs. It does not calculate performance from raw telemetry; unsupported measurements are rejected. Rule-based coaching remains available without an API key.",
+  highlights: [
+    "F1 2021 UDP ingestion, recording and replay",
+    "FastAPI backend and Next.js interface with bounded WebSocket updates",
+    "Deterministic lap and session analysis with validated data boundaries",
+    "Local-first telemetry and optional coaching grounded in measured evidence",
   ],
   features: [
     "Live F1 2021 telemetry ingestion",

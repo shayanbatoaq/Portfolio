@@ -39,8 +39,8 @@ export const crewProjects: CrewProject[] = [
     role: "Role-based reasoning workflow prototype",
     summary: "A proposer and opponent draft cases; a judge stage compares the arguments.",
     description:
-      "An interactive portfolio prototype demonstrating a structured CrewAI workflow for testing a motion from two sides and passing both arguments to a separate judge stage.",
-    runtime: "CrewAI · OpenRouter",
+      "An interactive portfolio prototype demonstrating a structured role-based workflow for testing a motion from two sides and passing both arguments to a separate judge stage.",
+    runtime: "OpenRouter · Workflow prototype",
     accent: "#fb7185",
     accentRgb: "251, 113, 133",
     fields: [
@@ -72,7 +72,7 @@ export const crewProjects: CrewProject[] = [
     summary: "Explore a staged workflow that turns a small product brief into code outputs.",
     description:
       "An experimental portfolio workflow that asks separate stages to choose a stack, draft a small software project, and review the generated files. It demonstrates the process; it is not presented as production software delivery.",
-    runtime: "CrewAI · Claude Sonnet",
+    runtime: "OpenRouter · Code generation prototype",
     accent: "#fbbf24",
     accentRgb: "251, 191, 36",
     fields: [
@@ -105,7 +105,7 @@ export const crewProjects: CrewProject[] = [
     summary: "Explore a staged path from company checks to evidence gathering and synthesis.",
     description:
       "A portfolio prototype designed to demonstrate how company checks, research steps, and analysis can be organized. Its output is experimental and should not be treated as current information or financial advice.",
-    runtime: "CrewAI · Research Workflow",
+    runtime: "OpenRouter · Research prototype",
     accent: "#34d399",
     accentRgb: "52, 211, 153",
     fields: [
@@ -133,7 +133,7 @@ export const crewProjects: CrewProject[] = [
     summary: "Explore a staged workflow for scanning an industry, comparing companies, and drafting a selection rationale.",
     description:
       "An experimental portfolio workflow designed to surface candidate companies, compare available material, and draft a selection rationale. It does not provide validated real-time research or financial advice.",
-    runtime: "CrewAI · Research Workflow",
+    runtime: "OpenRouter · Research prototype",
     accent: "#818cf8",
     accentRgb: "129, 140, 248",
     fields: [
