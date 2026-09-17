@@ -66,7 +66,12 @@ export function Hero({ onAskClick }: { onAskClick: () => void }) {
             }}
           >
             <span>I build software that connects</span>
-            <GradientText className="inline-block">product, data and AI.</GradientText>
+            <GradientText
+              className="inline-block"
+              tone="hero"
+            >
+              product, data and AI.
+            </GradientText>
           </p>
         </Reveal>
 

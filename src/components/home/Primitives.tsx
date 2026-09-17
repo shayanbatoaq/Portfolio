@@ -26,19 +26,31 @@ function useScrollReveal(threshold = 0.1) {
 export function GradientText({
   children,
   className = "",
+  tone = "default",
 }: {
   children: React.ReactNode;
   className?: string;
+  tone?: "default" | "hero";
 }) {
+  const isHeroTone = tone === "hero";
+
   return (
     <span
       className={className}
       style={{
         background:
-          "linear-gradient(135deg, #1E90FF 0%, #4F7BFF 30%, #6A5ACD 65%, #8A2BE2 100%)",
+          isHeroTone
+            ? "linear-gradient(135deg, #E4F6FF 0%, #D6E4FF 42%, #F0D8FF 100%)"
+            : "linear-gradient(135deg, #1E90FF 0%, #4F7BFF 30%, #6A5ACD 65%, #8A2BE2 100%)",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
         backgroundClip: "text",
+        filter: isHeroTone
+          ? "drop-shadow(0 3px 12px rgba(0, 0, 0, 0.95))"
+          : undefined,
+        WebkitTextStroke: isHeroTone
+          ? "0.35px rgba(255, 255, 255, 0.5)"
+          : undefined,
       }}
     >
       {children}
