@@ -48,7 +48,7 @@ const CHAPTERS = [
 
 export function Philosophy() {
   return (
-    <section id="philosophy" className="py-32 px-6">
+    <section id="philosophy" className="mt-28 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <Reveal>
           <div className="mb-20">
@@ -56,7 +56,7 @@ export function Philosophy() {
               className="text-[10px] tracking-[0.35em] text-white/25 uppercase mb-5"
               style={{ fontFamily: "var(--font-body)" }}
             >
-              06 — Philosophy
+              My Philosophy
             </p>
             <h2
               className="font-bold text-white leading-[0.9] tracking-[-0.03em]"

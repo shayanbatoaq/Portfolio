@@ -2,6 +2,7 @@
 
 import { aboutTopics } from "@/data/experience";
 import { GradientText, Reveal } from "./Primitives";
+import { Philosophy } from "./Philosophy";
 
 export function About() {
   return (
@@ -106,6 +107,7 @@ export function About() {
           ))}
         </div>
 
+        <Philosophy />
       </div>
     </section>
   );

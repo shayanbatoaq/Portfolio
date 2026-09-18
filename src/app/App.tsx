@@ -9,7 +9,6 @@ import { About } from "@/components/home/About";
 import { FeaturedWork } from "@/components/home/FeaturedWork";
 import { TechnicalCapabilities } from "@/components/home/TechnicalCapabilities";
 import { Patricians } from "@/components/home/Patricians";
-import { Philosophy } from "@/components/home/Philosophy";
 import { Resume } from "@/components/home/Resume";
 import { Contact } from "@/components/home/Contact";
 import { AskButton, AskModal } from "@/components/home/AskAssistant";
@@ -56,7 +55,6 @@ export default function App() {
           <About />
           <Patricians />
           <Resume />
-          <Philosophy />
           <Contact />
         </main>
       </div>

@@ -89,18 +89,18 @@ export function Patricians() {
                   onFocus={() =>
                     emitSceneReaction("patricians-hover", 1.15)
                   }
-                  className="w-52 h-52 rounded-2xl flex flex-col items-center justify-center"
+                  className="w-full max-w-md aspect-[2/1] rounded-2xl flex items-center justify-center p-6 sm:p-8"
                   style={{
                     background: "rgba(255,255,255,0.98)",
                     border: "1px solid rgba(255,255,255,0.07)",
                   }}
                 >
                   <img
-                    src="/assets/patricians-icon-transparent.png"
+                    src="/assets/patricians-wordmark.png"
                     alt="Patricians"
-                    width={1254}
-                    height={1254}
-                    className="w-36 h-36 object-contain"
+                    width={1080}
+                    height={181}
+                    className="w-full h-auto object-contain"
                   />
                 </a>
               </div>

@@ -18,7 +18,7 @@ export function Contact() {
                 className="text-[10px] tracking-[0.35em] text-white/20 uppercase mb-8"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                07 — Contact
+                06 — Contact
               </p>
               <h2
                 className="font-bold text-white leading-[0.9] tracking-[-0.03em] mb-6"
@@ -38,7 +38,7 @@ export function Contact() {
                 I am open to software engineering and applied-AI roles, internships, projects and collaborations.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-4">
                 <a
                   href={`mailto:${contact.email}`}
                   className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:opacity-90 hover:scale-[1.03] active:scale-[0.97]"
@@ -91,6 +91,16 @@ export function Contact() {
                   }
                 >
                   Instagram
+                  <ArrowUpRight size={14} />
+                </a>
+                <a
+                  href={contact.githubProfile}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full border border-white/[0.09] bg-white/[0.04] text-sm font-semibold text-white/50 transition-all duration-300 hover:text-white/90 hover:scale-[1.03] active:scale-[0.97]"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  GitHub
                   <ArrowUpRight size={14} />
                 </a>
               </div>

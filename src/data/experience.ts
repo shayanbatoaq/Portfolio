@@ -28,15 +28,4 @@ export const aboutTopics = [
     imageAlt: "Connected nodes representing data flows and applied AI",
     imageContain: false,
   },
-  {
-    label: "Building with Clients — Patricians",
-    heading: "Connecting technical decisions to real needs.",
-    body: "As a co-founder of Patricians, I work directly with clients across product strategy, requirements, design, development and delivery. That experience has taught me to connect technical decisions with actual user and business needs.",
-    gradFrom: "rgba(30,144,255,0.08)",
-    gradTo: "rgba(106,90,205,0.08)",
-    reverse: false,
-    image: "/assets/patricians-wordmark.png",
-    imageAlt: "Patricians logo",
-    imageContain: true,
-  },
 ];
