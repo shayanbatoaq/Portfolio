@@ -1,7 +1,6 @@
 "use client";
 
 import { capabilityGroups } from "@/data/shayan/skills";
-import { internship } from "@/data/experience";
 import { GradientText, Reveal } from "./Primitives";
 
 export function TechnicalCapabilities() {
@@ -24,13 +23,6 @@ export function TechnicalCapabilities() {
             </Reveal>
           ))}
         </div>
-        <Reveal>
-          <div className="mt-8 border-t border-white/[0.07] pt-8">
-            <p className="mb-3 text-xs text-blue-300/65">{internship.dates}</p>
-            <h3 className="mb-3 text-lg font-semibold text-white/80">{internship.role} · {internship.company}</h3>
-            <p className="max-w-3xl text-sm leading-7 text-white/45">{internship.description}</p>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
